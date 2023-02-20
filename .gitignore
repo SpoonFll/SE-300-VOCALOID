@@ -3,3 +3,7 @@
 **/.DS_Store
 **/JUCE
 **/builds
+**/cmake-build-debug
+**/.vscode
+**/.cache
+**/.idea
