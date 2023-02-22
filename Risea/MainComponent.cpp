@@ -6,15 +6,15 @@ MainComponent::MainComponent()
     setSize (600, 400);
 
     //creating the first button
-    button1.setButtonText("Button 1");
+    button1.setButtonText("Mode: Speech Synthesis");
     addAndMakeVisible (button1);
 
     //creating the second button
-    button2.setButtonText("Button 2");
+    button2.setButtonText("Mode: Music Synthesis");
     addAndMakeVisible (button2);
 
     //creating the third button
-    button3.setButtonText("Button 3");
+    button3.setButtonText("Help");
     addAndMakeVisible (button3);
 
 }
