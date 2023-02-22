@@ -26,6 +26,9 @@ private:
     //==============================================================================
     // Your private member variables go here...
     juce::TextButton button1;
+    void button1OnClick();
+
+
     juce::TextButton button2;
     juce::TextButton button3;
 

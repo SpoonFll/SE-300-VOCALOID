@@ -1,25 +1,31 @@
 #include "MainComponent.h"
 
 //==============================================================================
-MainComponent::MainComponent()
+MainComponent::MainComponent() : button1("Mode: Speech Synthesis"), button2("Mode: Music Synthesis"), button3("Help")
 {
     setSize (600, 400);
 
     //creating the first button
-    button1.setButtonText("Mode: Speech Synthesis");
-    addAndMakeVisible (button1);
-
+    //button1.setButtonText("Mode: Speech Synthesis");
+    button1.onClick = [this] { button1OnClick(); };
+    addAndMakeVisible (&button1);
     //creating the second button
-    button2.setButtonText("Mode: Music Synthesis");
-    addAndMakeVisible (button2);
+    //button2.setButtonText("Mode: Music Synthesis");
+    addAndMakeVisible (&button2);
 
     //creating the third button
-    button3.setButtonText("Help");
-    addAndMakeVisible (button3);
+    //button3.setButtonText("Help");
+    addAndMakeVisible (&button3);
 
 }
 
 //==============================================================================
+
+void MainComponent::button1OnClick()
+{
+
+}
+
 void MainComponent::paint (juce::Graphics& g)
 {
     // (Our component is opaque, so we must completely fill the background with a solid colour)
