@@ -20,10 +20,14 @@ public:
     //==============================================================================
     void paint (juce::Graphics&) override;
     void resized() override;
+    void drawButtonBackground(juce::Graphics&, juce::Button&, const juce::Colour&, bool);
 
 private:
     //==============================================================================
     // Your private member variables go here...
+    juce::TextButton button1;
+    juce::TextButton button2;
+    juce::TextButton button3;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MainComponent)
 };
