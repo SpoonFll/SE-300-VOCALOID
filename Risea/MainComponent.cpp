@@ -57,11 +57,13 @@ void MainComponent::resized()
     auto area = getLocalBounds();
 
     auto buttonHeight = 30;
+    area.setBounds(150,170,160,80);
     // You can change button size and location here. Still need to find how to modify width to put buttons side by side
-        button1.setBounds (area.removeFromBottom (buttonHeight).reduced (2 / border));//sets size
+        button1.setBounds(area);//sets size
+
         //button2.setBounds (area.removeFromBottom (buttonHeight).reduced (2 /border));
         //button3.setBounds (area.removeFromBottom (buttonHeight).reduced (2 / border));
-        button1.setTopLeftPosition(150,400);//set position of buttons
+        //button1.setTopLeftPosition(150,400);//set position of buttons
 
 
 }
