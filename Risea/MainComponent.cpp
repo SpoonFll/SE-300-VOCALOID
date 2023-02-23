@@ -57,9 +57,9 @@ void MainComponent::resized()
     auto area = getLocalBounds();
 
     auto buttonHeight = 30;
-        button1.setBounds (area.removeFromTop (buttonHeight).reduced (border));
-        button2.setBounds (area.removeFromTop (buttonHeight).reduced (border));
-        button3.setBounds (area.removeFromTop (buttonHeight).reduced (border));
+        button1.setBounds (area.removeFromBottom (buttonHeight).reduced (border));
+        button2.setBounds (area.removeFromBottom (buttonHeight).reduced (border));
+        button3.setBounds (area.removeFromBottom (buttonHeight).reduced (border));
 
 }
 /**
