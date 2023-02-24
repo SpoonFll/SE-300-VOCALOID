@@ -34,8 +34,9 @@ public:
 
 private:
     //==============================================================================
-    // Your private member variables go here...
+    // Your private member variables go here..
     juce::TextButton button1;
+    Component::SafePointer<juce::TopLevelWindow> window;
     void button1OnClick();//for button1 lambda function
 
 

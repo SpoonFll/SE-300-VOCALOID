@@ -1,5 +1,5 @@
 #include "MainComponent.h"
-
+//namespace juce
 //==============================================================================
 /**
  * constructs buttons and sets size for main component object
@@ -11,7 +11,18 @@ MainComponent::MainComponent() : button1("Mode: Speech Synthesis"), button2("Mod
 
     //creating the first button
     //button1.setButtonText("Mode: Speech Synthesis");
-    button1.onClick = [this] { button1OnClick(); };//
+    button1.onClick = [this] {
+        if(window)
+            window->broughtToFront();
+        else
+        {
+            window = new juce::TopLevelWindow( "speech", true);
+            window->addToDesktop();
+            window->centreWithSize(600,400);
+            window->setVisible(true);
+
+        }
+    };//
     addAndMakeVisible (&button1);
     //creating the second button
     //button2.setButtonText("Mode: Music Synthesis");
@@ -30,7 +41,6 @@ MainComponent::MainComponent() : button1("Mode: Speech Synthesis"), button2("Mod
  */
 void MainComponent::button1OnClick()
 {
-
 }
 /**
  * paints the basic elements with the g Graphics object only prints welcome for now
