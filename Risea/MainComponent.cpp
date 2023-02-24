@@ -57,9 +57,11 @@ void MainComponent::resized()
     // update their positions.
     auto border = 4;
     auto area = getLocalBounds();
+    auto area2 = getLocalBounds(); 
+    //What if we use multiple area variables so that multiple buttons can be made
 
     auto buttonHeight = 30;
-    area.setBounds(150,170,160,80);
+    area.setBounds(150,170,160,80); // whats the basis for this? coordinates?
     // You can change button size and location here. Still need to find how to modify width to put buttons side by side
         button1.setBounds(area);//sets size
 
