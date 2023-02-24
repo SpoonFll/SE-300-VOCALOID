@@ -17,10 +17,8 @@ MainComponent::MainComponent() : button1("Mode: Speech Synthesis"), button2("Mod
         else
         {
             window = new juce::TopLevelWindow( "speech", true);
-            window->addToDesktop();
             window->centreWithSize(600,400);
             window->setVisible(true);
-
         }
     };//
     addAndMakeVisible (&button1);
@@ -65,13 +63,13 @@ void MainComponent::resized()
     // This is called when the MainComponent is resized.
     // If you add any child components, this is where you should
     // update their positions.
-    auto border = 4;
+    //auto border = 4;
     auto area = getLocalBounds();
-    auto area2 = getLocalBounds(); 
+    //auto areaTwo = getLocalBounds();
     //What if we use multiple area variables so that multiple buttons can be made
 
-    auto buttonHeight = 30;
-    area.setBounds(150,170,160,80); // whats the basis for this? coordinates?
+    //auto buttonHeight = 30;
+    area.setBounds(150,170,160,80);//function is coordinates and size in order of numbers is x,y,width,height
     // You can change button size and location here. Still need to find how to modify width to put buttons side by side
         button1.setBounds(area);//sets size
 
