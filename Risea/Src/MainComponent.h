@@ -4,17 +4,17 @@
 // directly. If you need to remain compatible with Projucer-generated builds, and
 // have called `juce_generate_juce_header(<thisTarget>)` in your CMakeLists.txt,
 // you could `#include <JuceHeader.h>` here instead, to make all your module headers visible.
-#include <juce_gui_extra/juce_gui_extra.h>
+#include "juce_gui_extra/juce_gui_extra.h"
 /**
  * @Jackson
  * added in extra headers for music not sure which ones we need yet so I just
  * added a lot to see what we need
  */
-#include <juce_analytics/juce_analytics.h>
-#include <juce_audio_basics/juce_audio_basics.h>
-#include <juce_audio_devices/juce_audio_devices.h>
-#include <juce_audio_processors/juce_audio_processors.h>
-#include <juce_audio_utils/juce_audio_utils.h>
+#include "juce_analytics/juce_analytics.h"
+#include "juce_audio_basics/juce_audio_basics.h"
+#include "juce_audio_devices/juce_audio_devices.h"
+#include "juce_audio_processors/juce_audio_processors.h"
+#include "juce_audio_utils/juce_audio_utils.h"
 
 //==============================================================================
 /*
