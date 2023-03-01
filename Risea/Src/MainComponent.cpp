@@ -12,18 +12,43 @@ MainComponent::MainComponent() : button1("Mode: Speech Synthesis"), button2("Mod
     //creating the first button
     //button1.setButtonText("Mode: Speech Synthesis");
     button1.onClick = [this] {
-        if(window)
-            window->broughtToFront();
+        if(TTSwindow)
+            TTSwindow->broughtToFront();
         else
         {
-            window = new juce::TopLevelWindow( "speech", true);
-            window->centreWithSize(600,400);
-            window->setVisible(true);
+            TTSwindow = new juce::TopLevelWindow( "Text to Speech", true);
+            TTSwindow->centreWithSize(600,400);
+            TTSwindow->setVisible(true);
         }
-    };//
-    addAndMakeVisible (&button1);
+    };
+
     //creating the second button
     //button2.setButtonText("Mode: Music Synthesis");
+    button2.onClick = [this] {
+        if(MSwindow)
+            MSwindow->broughtToFront();
+        else
+        {
+            MSwindow = new juce::TopLevelWindow("Music Synthesis", true);
+            MSwindow->centreWithSize(600, 400);
+            MSwindow->setVisible(true);
+        }
+    };
+
+    //creating the third button
+    //button3.setButtonText("Help");
+    button3.onClick = [this] {
+        if(HELPwindow)
+            HELPwindow->broughtToFront();
+        else
+        {
+            HELPwindow = new juce::TopLevelWindow("Help", true);
+            HELPwindow->centreWithSize(600, 400);
+            HELPwindow->setVisible(true);
+        }
+    };
+
+    addAndMakeVisible (&button1);
     addAndMakeVisible (&button2);
 
     //creating the third button
@@ -40,6 +65,15 @@ MainComponent::MainComponent() : button1("Mode: Speech Synthesis"), button2("Mod
 void MainComponent::button1OnClick()
 {
 }
+
+void MainComponent::button2OnClick()
+{
+}
+
+void MainComponent::button3OnClick()
+{
+}
+
 /**
  * paints the basic elements with the g Graphics object only prints welcome for now
  * @param g
@@ -51,7 +85,7 @@ void MainComponent::paint (juce::Graphics& g)
 
     g.setFont (juce::Font (16.0f));
     g.setColour (juce::Colours::white);
-    g.drawText ("Welcome to Risea!", getLocalBounds(), juce::Justification::centred, true);
+    g.drawText ("Welcome to Risea!", getLocalBounds(), juce::Justification::centredTop, true);
 }
 /**
  * sets bounds for buttons and other elements after resize
@@ -65,13 +99,19 @@ void MainComponent::resized()
     // update their positions.
     //auto border = 4;
     auto area = getLocalBounds();
+    auto area2 = getLocalBounds();
+    auto area3 = getLocalBounds();
     //auto areaTwo = getLocalBounds();
     //What if we use multiple area variables so that multiple buttons can be made
 
     //auto buttonHeight = 30;
-    area.setBounds(150,170,160,80);//function is coordinates and size in order of numbers is x,y,width,height
+    area.setBounds(130,170,160,80);//function is coordinates and size in order of numbers is x,y,width,height
+    area2.setBounds(310, 170, 160, 80);
+    area3.setBounds(260, 110, 80, 40);
     // You can change button size and location here. Still need to find how to modify width to put buttons side by side
         button1.setBounds(area);//sets size
+        button2.setBounds(area2);
+        button3.setBounds(area3);
 
         //button2.setBounds (area.removeFromBottom (buttonHeight).reduced (2 /border));
         //button3.setBounds (area.removeFromBottom (buttonHeight).reduced (2 / border));

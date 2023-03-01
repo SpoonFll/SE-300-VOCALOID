@@ -36,12 +36,17 @@ private:
     //==============================================================================
     // Your private member variables go here..
     juce::TextButton button1;
-    Component::SafePointer<juce::TopLevelWindow> window;
+    Component::SafePointer<juce::TopLevelWindow> TTSwindow;
     void button1OnClick();//for button1 lambda function
 
-
     juce::TextButton button2;
+    Component::SafePointer<juce::TopLevelWindow> MSwindow;
+    void button2OnClick();//for button2 Lambda function
+
     juce::TextButton button3;
+    Component::SafePointer<juce::TopLevelWindow> HELPwindow;
+    void button3OnClick();//for button3 Lambda function
+
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MainComponent)
 };
