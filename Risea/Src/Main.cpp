@@ -1,4 +1,7 @@
 #include "MainComponent.h"
+#include "TTSComponent.h"
+#include "MSComponent.h"
+#include "HELPComponent.h"
 
 //==============================================================================
 class GuiAppApplication : public juce::JUCEApplication {
@@ -92,8 +95,11 @@ public:
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(MainWindow)
   };
 
+//==============================================================================
+
 private:
   std::unique_ptr<MainWindow> mainWindow;
+
 };
 
 //==============================================================================
