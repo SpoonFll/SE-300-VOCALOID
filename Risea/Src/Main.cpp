@@ -1,4 +1,7 @@
 #include "MainComponent.h"
+#include "TTSComponent.h"
+#include "MSComponent.h"
+#include "HELPComponent.h"
 
 //==============================================================================
 class GuiAppApplication : public juce::JUCEApplication {
@@ -92,8 +95,97 @@ public:
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(MainWindow)
   };
 
+//==============================================================================
+// window for TTS Class
+class TTSwindow : public juce::DocumentWindow {
+public:
+  explicit TTSwindow(juce::String name)
+    : DocumentWindow(
+          name,
+          juce::Desktop::getInstance().getDefaultLookAndFeel().findColour(
+                ResizableWindow::backgroundColourId),
+          DocumentWindow::allButtons) {
+      setUsingNativeTitleBar(true);
+      setContentOwned(new TTSComponent(), true); //error
+
+#if JUCE_IOS || JUCE_ANDROID
+        setFullScreen(true);
+#else 
+        setResizable(true, true);
+        centreWithSize(getWidth(), getHeight());
+#endif  
+        setVisible(true);
+        }
+    void closeButtonPressed() override {
+      JUCEApplication::getInstance()->systemRequestedQuit();
+    }
+
+  private:
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(TTSwindow)  
+};
+
+//==============================================================================
+// window for MS class
+class MSwindow : public juce::DocumentWindow {
+public:
+  explicit MSwindow(juce::String name)
+    : DocumentWindow(
+          name,
+          juce::Desktop::getInstance().getDefaultLookAndFeel().findColour(
+                ResizableWindow::backgroundColourId),
+          DocumentWindow::allButtons) {
+      setUsingNativeTitleBar(true);
+      setContentOwned(new MSComponent(), true);
+
+#if JUCE_IOS || JUCE_ANDROID
+        setFullScreen(true);
+#else 
+        setResizable(true, true);
+        centreWithSize(getWidth(), getHeight());
+#endif  
+        setVisible(true);
+        }
+    void closeButtonPressed() override {
+      JUCEApplication::getInstance()->systemRequestedQuit();
+    }
+
+  private:
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(MSwindow)  
+};
+
+//==============================================================================
+class HELPwindow : public juce::DocumentWindow {
+public:
+  explicit HELPwindow(juce::String name)
+    : DocumentWindow(
+          name,
+          juce::Desktop::getInstance().getDefaultLookAndFeel().findColour(
+                ResizableWindow::backgroundColourId),
+          DocumentWindow::allButtons) {
+      setUsingNativeTitleBar(true);
+      setContentOwned(new HELPComponent(), true);
+
+#if JUCE_IOS || JUCE_ANDROID
+        setFullScreen(true);
+#else 
+        setResizable(true, true);
+        centreWithSize(getWidth(), getHeight());
+#endif  
+        setVisible(true);
+        }
+    void closeButtonPressed() override {
+      JUCEApplication::getInstance()->systemRequestedQuit();
+    }
+
+  private:
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(HELPwindow)  
+};
+
+//==============================================================================
+
 private:
   std::unique_ptr<MainWindow> mainWindow;
+
 };
 
 //==============================================================================

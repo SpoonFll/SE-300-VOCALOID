@@ -50,10 +50,8 @@ MainComponent::MainComponent() : button1("Mode: Speech Synthesis"), button2("Mod
 
     addAndMakeVisible (&button1);
     addAndMakeVisible (&button2);
-
-    //creating the third button
-    //button3.setButtonText("Help");
     addAndMakeVisible (&button3);
+
 
 }
 
