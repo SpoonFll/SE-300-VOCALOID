@@ -20,11 +20,11 @@ class MSComponent : public juce::Component
     public:
     MSComponent();
 
-    void paint(juce::Grapics&) override;
+    void paint(juce::Graphics&) override;
     void resized() override;
-    void drawButtonBackground(juce::Graphics&, juce::Button&, const juce::Color&, bool);
+    void drawButtonBackground(juce::Graphics&, juce::Button&, const juce::Colour&, bool);
 
     private:
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MSComponent)
-}
+};

@@ -1,23 +1,21 @@
 #include "HELPComponent.h"
 
-HELPComponent::HELPComponent(): testButton("TEST")
+HelpComponent::HelpComponent()  : testButton("test")
 {
     setSize (400, 600);
 
-    testButton.onClick = [this] {
+    /*testButton.onClick = [this] {
         if(MainWindow)
             MainWindow->broughtToFront();
         else
         {
 
         }
-    };
+    };*/
 
     addAndMakeVisible(&testButton);
 }
-
-void HELPComponent::testButtonOnClick()
-{
+HelpComponent::~HelpComponent() noexcept {
 
 }
 

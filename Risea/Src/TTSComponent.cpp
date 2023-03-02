@@ -5,14 +5,14 @@ TTSComponent::TTSComponent() : testButton("TEST")
 {
     setSize (600, 400);
 
-    testButton.onClick = [this] {
+    /*testButton.onClick = [this] {
         if(MainWindow)
             MainWindow->broughtToFront();
         else
         {
 
         }
-    };
+    };*/
 
     addAndMakeVisible(&testButton);
 }
@@ -27,11 +27,11 @@ void TTSComponent::testButtonOnClick()
 */
 void TTSComponent::paint (juce::Graphics& g)
 {
-    g.fillAll(getLookAndFeel().findColour (juce::ResizeableWindow::backgroundColourID));
+    g.fillAll(getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));
 
     g.setFont(juce::Font (16.0f));
     g.setColour (juce::Colours::white);
-    g.drawText ("Text to Speech", getLocalBounds(), juce::Justification::centeredTop, true);
+    g.drawText ("Text to Speech", getLocalBounds(), juce::Justification::centredTop, true);
 }
 
 void TTSComponent::resized()

@@ -15,15 +15,23 @@
 #include "juce_audio_processors/juce_audio_processors.h"
 #include "juce_audio_utils/juce_audio_utils.h"
 
-class HELPComponent : public juce::Component
-{
-    public:
-    HELPComponent();
+class HelpComponent : public juce::Component
+        {
+public:
+    HelpComponent();
+    ~HelpComponent();//this is needed
+    /**
+     * decrunched the code need to impletment these to see functions
+     */
+    //void paint(juce::Graphics &) override;
 
-    void paint(juce::Grapics&) override;
-    void resized() override;
-    void drawButtonBackground(juce::Graphics&, juce::Button&, const juce::Color&, bool);
+    //void resized() override;
 
-    private:
+    //void drawButtonBackground(juce::Graphics &, juce::Button &, const juce::Colour &, bool);
 
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (HELPComponent)
+
+private:
+    juce::TextButton testButton;
+
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (HelpComponent)
+};

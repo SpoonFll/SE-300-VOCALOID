@@ -163,7 +163,7 @@ public:
                 ResizableWindow::backgroundColourId),
           DocumentWindow::allButtons) {
       setUsingNativeTitleBar(true);
-      setContentOwned(new HELPComponent(), true);
+      setContentOwned(new HelpComponent(), true);
 
 #if JUCE_IOS || JUCE_ANDROID
         setFullScreen(true);
