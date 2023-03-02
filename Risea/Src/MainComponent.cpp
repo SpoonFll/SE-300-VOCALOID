@@ -12,39 +12,39 @@ MainComponent::MainComponent() : button1("Mode: Speech Synthesis"), button2("Mod
     //creating the first button
     //button1.setButtonText("Mode: Speech Synthesis");
     button1.onClick = [this] {
-        if(TTSwindow)
-            TTSwindow->broughtToFront();
+        if(TtsWindow)
+            TtsWindow->broughtToFront();
         else
         {
-            TTSwindow = new juce::TopLevelWindow( "Text to Speech", true);
-            TTSwindow->centreWithSize(600,400);
-            TTSwindow->setVisible(true);
+            TtsWindow.reset(new TTSwindow("Text to speech"));
+            TtsWindow->centreWithSize(600,400);
+            TtsWindow->setVisible(true);
         }
     };
 
     //creating the second button
     //button2.setButtonText("Mode: Music Synthesis");
     button2.onClick = [this] {
-        if(MSwindow)
-            MSwindow->broughtToFront();
+        if(Mswindow)
+            Mswindow->broughtToFront();
         else
         {
-            MSwindow = new juce::TopLevelWindow("Music Synthesis", true);
-            MSwindow->centreWithSize(600, 400);
-            MSwindow->setVisible(true);
+            Mswindow.reset(new MSwindow("Music"));
+            Mswindow->centreWithSize(600, 400);
+            Mswindow->setVisible(true);
         }
     };
 
     //creating the third button
     //button3.setButtonText("Help");
     button3.onClick = [this] {
-        if(HELPwindow)
-            HELPwindow->broughtToFront();
+        if(Helpwindow)
+            Helpwindow->broughtToFront();
         else
         {
-            HELPwindow = new juce::TopLevelWindow("Help", true);
-            HELPwindow->centreWithSize(600, 400);
-            HELPwindow->setVisible(true);
+            Helpwindow.reset(new HELPwindow("Help"));
+            Helpwindow->centreWithSize(600, 400);
+            Helpwindow->setVisible(true);
         }
     };
 

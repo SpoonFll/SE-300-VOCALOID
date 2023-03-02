@@ -15,8 +15,98 @@
 #include "juce_audio_devices/juce_audio_devices.h"
 #include "juce_audio_processors/juce_audio_processors.h"
 #include "juce_audio_utils/juce_audio_utils.h"
+#include "HELPComponent.h"
+#include "MSComponent.h"
+#include "TTSComponent.h"
 
 //==============================================================================
+
+//==============================================================================
+// window for TTS Class
+class TTSwindow : public juce::DocumentWindow {
+public:
+    explicit TTSwindow(juce::String name)
+            : DocumentWindow(
+            name,
+            juce::Desktop::getInstance().getDefaultLookAndFeel().findColour(
+                    ResizableWindow::backgroundColourId),
+            DocumentWindow::allButtons) {
+        setUsingNativeTitleBar(true);
+        setContentOwned(new TTSComponent(), true); //error
+
+#if JUCE_IOS || JUCE_ANDROID
+        setFullScreen(true);
+#else
+        setResizable(true, true);
+        centreWithSize(getWidth(), getHeight());
+#endif
+        setVisible(true);
+    }
+    void closeButtonPressed() override {
+        juce::JUCEApplication::getInstance()->systemRequestedQuit();
+    }
+
+private:
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(TTSwindow)
+};
+
+//==============================================================================
+// window for MS class
+class MSwindow : public juce::DocumentWindow {
+public:
+    explicit MSwindow(juce::String name)
+            : DocumentWindow(
+            name,
+            juce::Desktop::getInstance().getDefaultLookAndFeel().findColour(
+                    ResizableWindow::backgroundColourId),
+            DocumentWindow::allButtons) {
+        setUsingNativeTitleBar(true);
+        setContentOwned(new MSComponent(), true);
+
+#if JUCE_IOS || JUCE_ANDROID
+        setFullScreen(true);
+#else
+        setResizable(true, true);
+        centreWithSize(getWidth(), getHeight());
+#endif
+        setVisible(true);
+    }
+    void closeButtonPressed() override {
+        juce::JUCEApplication::getInstance()->systemRequestedQuit();
+    }
+
+private:
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(MSwindow)
+};
+
+//==============================================================================
+class HELPwindow : public juce::DocumentWindow {
+public:
+    explicit HELPwindow(juce::String name)
+            : DocumentWindow(
+            name,
+            juce::Desktop::getInstance().getDefaultLookAndFeel().findColour(
+                    ResizableWindow::backgroundColourId),
+            DocumentWindow::allButtons) {
+        setUsingNativeTitleBar(true);
+        setContentOwned(new HelpComponent(), true);
+
+#if JUCE_IOS || JUCE_ANDROID
+        setFullScreen(true);
+#else
+        setResizable(true, true);
+        centreWithSize(getWidth(), getHeight());
+#endif
+        setVisible(true);
+    }
+    void closeButtonPressed() override {
+        juce::JUCEApplication::getInstance()->systemRequestedQuit();
+    }
+
+private:
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(HELPwindow)
+};
+
 /*
     This component lives inside our window, and this is where you should put all
     your controls and content.
@@ -36,15 +126,15 @@ private:
     //==============================================================================
     // Your private member variables go here..
     juce::TextButton button1;
-    Component::SafePointer<juce::TopLevelWindow> TTSwindow;//create a top level window not a tts window we should move those document windows here
+    std::unique_ptr<TTSwindow> TtsWindow;
     void button1OnClick();//for button1 lambda function
 
     juce::TextButton button2;
-    Component::SafePointer<juce::TopLevelWindow> MSwindow;
+    std::unique_ptr<MSwindow> Mswindow;
     void button2OnClick();//for button2 Lambda function
 
     juce::TextButton button3;
-    Component::SafePointer<juce::TopLevelWindow> HELPwindow;
+    std::unique_ptr<HELPwindow> Helpwindow;
     void button3OnClick();//for button3 Lambda function
 
 
