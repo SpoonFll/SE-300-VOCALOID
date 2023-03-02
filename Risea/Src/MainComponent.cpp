@@ -12,40 +12,19 @@ MainComponent::MainComponent() : button1("Mode: Speech Synthesis"), button2("Mod
     //creating the first button
     //button1.setButtonText("Mode: Speech Synthesis");
     button1.onClick = [this] {
-        if(TtsWindow)
-            TtsWindow->broughtToFront();
-        else
-        {
-            TtsWindow.reset(new TTSwindow("Text to speech"));
-            TtsWindow->centreWithSize(600,400);
-            TtsWindow->setVisible(true);
-        }
+        button1OnClick();
     };
 
     //creating the second button
     //button2.setButtonText("Mode: Music Synthesis");
     button2.onClick = [this] {
-        if(Mswindow)
-            Mswindow->broughtToFront();
-        else
-        {
-            Mswindow.reset(new MSwindow("Music"));
-            Mswindow->centreWithSize(600, 400);
-            Mswindow->setVisible(true);
-        }
+        button2OnClick();
     };
 
     //creating the third button
     //button3.setButtonText("Help");
     button3.onClick = [this] {
-        if(Helpwindow)
-            Helpwindow->broughtToFront();
-        else
-        {
-            Helpwindow.reset(new HELPwindow("Help"));
-            Helpwindow->centreWithSize(600, 400);
-            Helpwindow->setVisible(true);
-        }
+        button3OnClick();
     };
 
     addAndMakeVisible (&button1);
@@ -58,18 +37,48 @@ MainComponent::MainComponent() : button1("Mode: Speech Synthesis"), button2("Mod
 //==============================================================================
 /**
  * function for button click on button 1
- * @TODO add functionality open a new window or have it play back music in earlier sprints
+ * opens new window and makes it visible
  */
 void MainComponent::button1OnClick()
 {
+    if(TtsWindow)
+        TtsWindow->broughtToFront();
+    else
+    {
+        TtsWindow.reset(new TTSwindow("Text to speech"));//declares class this way with the pointer as described by JUCE
+        TtsWindow->centreWithSize(600,400);
+        TtsWindow->setVisible(true);
+    }
 }
-
+/**
+ * function of button 2
+ * opens music window and brings to front
+ */
 void MainComponent::button2OnClick()
 {
+    if(Mswindow)
+        Mswindow->broughtToFront();
+    else
+    {
+        Mswindow.reset(new MSwindow("Music"));//declares class this way with the pointer as described by JUCE
+        Mswindow->centreWithSize(600, 400);
+        Mswindow->setVisible(true);
+    }
 }
-
+/**
+ * function for button 3
+ * creates new window for help and brings it to the front
+ */
 void MainComponent::button3OnClick()
 {
+    if(Helpwindow)
+        Helpwindow->broughtToFront();
+    else
+    {
+        Helpwindow.reset(new HELPwindow("Help"));//declares class this way with the pointer as described by JUCE
+        Helpwindow->centreWithSize(600, 400);
+        Helpwindow->setVisible(true);
+    }
 }
 
 /**

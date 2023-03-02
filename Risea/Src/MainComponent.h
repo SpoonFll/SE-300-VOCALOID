@@ -23,6 +23,9 @@
 
 //==============================================================================
 // window for TTS Class
+/**
+ * implements a new window for TTS
+ */
 class TTSwindow : public juce::DocumentWindow {
 public:
     explicit TTSwindow(juce::String name)
@@ -110,6 +113,9 @@ private:
 /*
     This component lives inside our window, and this is where you should put all
     your controls and content.
+
+
+    controls main component
 */
 class MainComponent   : public juce::Component
 {
@@ -126,15 +132,15 @@ private:
     //==============================================================================
     // Your private member variables go here..
     juce::TextButton button1;
-    std::unique_ptr<TTSwindow> TtsWindow;
+    std::unique_ptr<TTSwindow> TtsWindow;//adds class
     void button1OnClick();//for button1 lambda function
 
     juce::TextButton button2;
-    std::unique_ptr<MSwindow> Mswindow;
+    std::unique_ptr<MSwindow> Mswindow;//adds class
     void button2OnClick();//for button2 Lambda function
 
     juce::TextButton button3;
-    std::unique_ptr<HELPwindow> Helpwindow;
+    std::unique_ptr<HELPwindow> Helpwindow;//adds class
     void button3OnClick();//for button3 Lambda function
 
 
