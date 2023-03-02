@@ -22,6 +22,7 @@ public:
     ~HelpComponent();//this is needed
     /**
      * decrunched the code need to impletment these to see functions
+     * windows will still be black without this
      */
     //void paint(juce::Graphics &) override;
 
@@ -34,4 +35,4 @@ private:
     juce::TextButton testButton;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (HelpComponent)
-};
+};//forgor semicolon

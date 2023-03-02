@@ -3,7 +3,7 @@
 HelpComponent::HelpComponent()  : testButton("test")
 {
     setSize (400, 600);
-
+    //this is for opening a new window dont need
     /*testButton.onClick = [this] {
         if(MainWindow)
             MainWindow->broughtToFront();

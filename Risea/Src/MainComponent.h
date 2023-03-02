@@ -36,7 +36,7 @@ private:
     //==============================================================================
     // Your private member variables go here..
     juce::TextButton button1;
-    Component::SafePointer<juce::TopLevelWindow> TTSwindow;
+    Component::SafePointer<juce::TopLevelWindow> TTSwindow;//create a top level window not a tts window we should move those document windows here
     void button1OnClick();//for button1 lambda function
 
     juce::TextButton button2;
