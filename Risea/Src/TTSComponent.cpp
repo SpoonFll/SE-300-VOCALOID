@@ -1,7 +1,7 @@
 #include "TTSComponent.h"
 
 // Buttons etc go here
-TTSComponent::TTSComponent() : testButton("TEST")
+TTSComponent::TTSComponent() : PPButton("Play/Pause")
 {
     setSize (600, 400);
 
@@ -14,10 +14,10 @@ TTSComponent::TTSComponent() : testButton("TEST")
         }
     };*/
 
-    addAndMakeVisible(&testButton);
+    addAndMakeVisible(&PPButton);
 }
 //==============================================================================
-void TTSComponent::testButtonOnClick()
+void TTSComponent::PPButtonOnClick()
 {
 }
 //==============================================================================
@@ -40,8 +40,10 @@ void TTSComponent::paint (juce::Graphics& g)
 void TTSComponent::resized()
 {
     auto area = getLocalBounds();
-    //this will be continued when buttons and other items are implemented
 
+    area.setBounds(130, 170, 160, 80);
+    //this will be continued when buttons and other items are implemented
+    PPButton.setBounds(area);
 }
 
 /**

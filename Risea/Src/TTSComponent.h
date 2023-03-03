@@ -18,9 +18,9 @@ public:
     void drawButtonBackground(juce::Graphics&, juce::Button&, const juce::Colour&, bool);
 
 private:
-    juce::TextButton testButton;
+    juce::TextButton PPButton;
     Component::SafePointer<juce::TopLevelWindow> TTSwindow;
-    void testButtonOnClick(); //for the test button Lambda function
+    void PPButtonOnClick(); //for the Play/Pause button Lambda function
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(TTSComponent)
 };
