@@ -1,23 +1,39 @@
 #include "TTSComponent.h"
 
 // Buttons etc go here
-TTSComponent::TTSComponent() : PPButton("Play/Pause")
+TTSComponent::TTSComponent() : PPButton("Play/Pause"), VoiceLabel("Select Voice:"), choiceButton("PlaceHolder")
 {
     setSize (600, 400);
 
-    /*testButton.onClick = [this] {
-        if(MainWindow)
-            MainWindow->broughtToFront();
-        else
-        {
-
-        }
-    };*/
 
     addAndMakeVisible(&PPButton);
+    addAndMakeVisible(&choiceButton);
+
+
+    //testing section for dropdown menu
+    juce::ComboBox voiceMenu;
+    //SynthsizerVoice might be sampler
+    juce::SynthesiserVoice voiceChoice;
+
+    addAndMakeVisible(voiceLabel);
+    addAndMakeVisible(voiceMenu);
+    voiceMenu.addItem ("Voice 1", 1);
+    voiceMenu.addItem ("Voice 2", 2);
+    voiceMenu.addItem ("Voice 3", 3);
+
+    voiceMenu.onChange = [this] 
+    {
+        voiceMenuChanged();
+    };
+
+    voiceMenu.setSelectedId (1);
 }
 //==============================================================================
 void TTSComponent::PPButtonOnClick()
+{
+}
+
+void TTSComponent::choiceButtonOnClick()
 {
 }
 //==============================================================================
@@ -75,3 +91,17 @@ void TTSComponent::drawButtonBackground(juce::Graphics& g, juce::Button& button,
     g.fillRect (buttonArea);
 }
 
+void TTSComponent::voiceMenuChanged()
+{
+    switch (voiceMenu.getSelectedId())
+    {
+        case 1: //holder
+                break;
+        case 2: //holder
+                break;
+        case 3: //holder
+                break;
+        default: break;
+    }
+
+}
