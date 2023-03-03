@@ -41,7 +41,8 @@ void TTSComponent::resized()
 {
     auto area = getLocalBounds();
 
-    area.setBounds(130, 170, 160, 80);
+    area.setBounds(10, 10, 80, 40);
+    //itty bitty tiny pp button
     //this will be continued when buttons and other items are implemented
     PPButton.setBounds(area);
 }
