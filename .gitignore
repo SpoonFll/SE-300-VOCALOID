@@ -10,4 +10,3 @@
 **/.cache/clangd/index
 **/build
 **/cmake-build-debug-event-trace
-**/RISEA_TEST_VOICE_BANK
