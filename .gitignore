@@ -10,3 +10,7 @@
 **/.cache/clangd/index
 **/build
 **/cmake-build-debug-event-trace
+**/Art
+**/Extras
+**/readme.txt
+**/character.txt
