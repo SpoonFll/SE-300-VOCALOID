@@ -12,6 +12,11 @@ TTSComponent::TTSComponent() : PPButton("Play/Pause")
     voiceMenu.addItem("Voice 2", 2);
     voiceMenu.addItem("Voice 3", 3);
 
+    voiceMenu.onChange = [this]
+    {
+        voiceMenuChanged();
+    };
+
      setSize (600, 400);
 }
 //==============================================================================
@@ -42,10 +47,9 @@ void TTSComponent::resized()
     auto newArea = getLocalBounds();
     auto newArea2 = getLocalBounds();
 
-    area.setBounds(10, 10, 80, 40);
+    area.setBounds(10, 10, 100, 40);
     //itty bitty tiny pp button
-    newArea.setBounds(150, 10, 80, 40);
-    newArea2.setBounds(200, 5, 80, 40);
+    newArea.setBounds(490, 10, 100, 40);
     //this will be continued when buttons and other items are implemented
     PPButton.setBounds(area);
     voiceMenu.setBounds(newArea);
