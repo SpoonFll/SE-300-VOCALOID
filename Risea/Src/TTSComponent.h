@@ -16,11 +16,21 @@ public:
     void paint (juce::Graphics&) override;
     void resized() override;
     void drawButtonBackground(juce::Graphics&, juce::Button&, const juce::Colour&, bool);
+//Testing Drop Down 
+    void voiceMenuChanged();
 
 private:
     juce::TextButton PPButton;
-    Component::SafePointer<juce::TopLevelWindow> TTSwindow;
     void PPButtonOnClick(); //for the Play/Pause button Lambda function
+
+//Testing dropdown
+    juce::ComboBox voiceMenu;
+    //SynthsizerVoice might be sampler
+    juce::Synthesiser voiceChoice;
+   // Component::SafePointer<juce::TopLevelWindow> TTSWindow;
+    //void voiceMenuOnclick
+
+    Component::SafePointer<juce::TopLevelWindow> TTSwindow;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(TTSComponent)
 };
