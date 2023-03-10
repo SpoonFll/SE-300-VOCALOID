@@ -1,13 +1,16 @@
 #include "TTSComponent.h"
 
 // Buttons etc go here
-TTSComponent::TTSComponent() : PPButton("Play/Pause"), voiceLabel("Select Voice:")
+TTSComponent::TTSComponent() : PPButton("Play/Pause")
 {
 
     addAndMakeVisible(&PPButton);
     addAndMakeVisible(voiceMenu);
     
     voiceMenu.setTextWhenNothingSelected("Choices");
+    voiceMenu.addItem("Voice 1", 1);
+    voiceMenu.addItem("Voice 2", 2);
+    voiceMenu.addItem("Voice 3", 3);
 
      setSize (600, 400);
 }
