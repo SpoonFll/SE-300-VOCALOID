@@ -1,41 +1,21 @@
 #include "TTSComponent.h"
 
 // Buttons etc go here
-TTSComponent::TTSComponent() : PPButton("Play/Pause"), VoiceLabel("Select Voice:"), choiceButton("PlaceHolder")
+TTSComponent::TTSComponent() : PPButton("Play/Pause"), voiceLabel("Select Voice:")
 {
-    setSize (600, 400);
-
 
     addAndMakeVisible(&PPButton);
-    addAndMakeVisible(&choiceButton);
-
-
-    //testing section for dropdown menu
-    juce::ComboBox voiceMenu;
-    //SynthsizerVoice might be sampler
-    juce::SynthesiserVoice voiceChoice;
-
-    addAndMakeVisible(voiceLabel);
     addAndMakeVisible(voiceMenu);
-    voiceMenu.addItem ("Voice 1", 1);
-    voiceMenu.addItem ("Voice 2", 2);
-    voiceMenu.addItem ("Voice 3", 3);
+    
+    voiceMenu.setTextWhenNothingSelected("Choices");
 
-    voiceMenu.onChange = [this] 
-    {
-        voiceMenuChanged();
-    };
-
-    voiceMenu.setSelectedId (1);
+     setSize (600, 400);
 }
 //==============================================================================
 void TTSComponent::PPButtonOnClick()
 {
 }
 
-void TTSComponent::choiceButtonOnClick()
-{
-}
 //==============================================================================
 /**
 * paints the basic elements with g graphics object
@@ -56,11 +36,17 @@ void TTSComponent::paint (juce::Graphics& g)
 void TTSComponent::resized()
 {
     auto area = getLocalBounds();
+    auto newArea = getLocalBounds();
+    auto newArea2 = getLocalBounds();
 
     area.setBounds(10, 10, 80, 40);
     //itty bitty tiny pp button
+    newArea.setBounds(150, 10, 80, 40);
+    newArea2.setBounds(200, 5, 80, 40);
     //this will be continued when buttons and other items are implemented
     PPButton.setBounds(area);
+    voiceMenu.setBounds(newArea);
+    
 }
 
 /**

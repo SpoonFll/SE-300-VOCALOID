@@ -19,21 +19,18 @@ public:
 //Testing Drop Down 
     void voiceMenuChanged();
 
-
 private:
     juce::TextButton PPButton;
-    juce::TextButton choiceButton;
-    Component::SafePointer<juce::TopLevelWindow> TTSwindow;
     void PPButtonOnClick(); //for the Play/Pause button Lambda function
-    void choiceButtonOnClick();
 
 //Testing dropdown
     juce::ComboBox voiceMenu;
     //SynthsizerVoice might be sampler
-    juce::SynthesiserVoice voiceChoice;
+    juce::Synthesiser voiceChoice;
    // Component::SafePointer<juce::TopLevelWindow> TTSWindow;
     //void voiceMenuOnclick
-    juce::Label voiceLabel;
+
+    Component::SafePointer<juce::TopLevelWindow> TTSwindow;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(TTSComponent)
 };
