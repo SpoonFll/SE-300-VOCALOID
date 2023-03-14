@@ -72,8 +72,6 @@ target_sources(GuiAppExample
         Src/TTSComponent.cpp
         Src/WavPlayer.cpp
         Src/WavPlayer.h
-        Src/WavReader.cpp
-        Src/WavReader.h
         )
 
 

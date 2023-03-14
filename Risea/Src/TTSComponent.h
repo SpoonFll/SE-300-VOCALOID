@@ -32,6 +32,5 @@ private:
 
     Component::SafePointer<juce::TopLevelWindow> TTSwindow;
     void testButtonOnClick(); //for the test button Lambda function
-    WavPlayer& player;
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(TTSComponent)
 };
