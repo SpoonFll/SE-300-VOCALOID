@@ -1,25 +1,29 @@
 #include "TTSComponent.h"
 
 // Buttons etc go here
-TTSComponent::TTSComponent() : testButton("TEST")
+TTSComponent::TTSComponent() : PPButton("Play/Pause")
 {
-    setSize (600, 400);
 
-    /*testButton.onClick = [this] {
-        if(MainWindow)
-            MainWindow->broughtToFront();
-        else
-        {
+    addAndMakeVisible(&PPButton);
+    addAndMakeVisible(voiceMenu);
+    
+    voiceMenu.setTextWhenNothingSelected("Choices");
+    voiceMenu.addItem("Voice 1", 1);
+    voiceMenu.addItem("Voice 2", 2);
+    voiceMenu.addItem("Voice 3", 3);
 
-        }
-    };*/
+    voiceMenu.onChange = [this]
+    {
+        voiceMenuChanged();
+    };
 
-    addAndMakeVisible(&testButton);
+     setSize (600, 400);
 }
 //==============================================================================
-void TTSComponent::testButtonOnClick()
+void TTSComponent::PPButtonOnClick()
 {
 }
+
 //==============================================================================
 /**
 * paints the basic elements with g graphics object
@@ -40,8 +44,16 @@ void TTSComponent::paint (juce::Graphics& g)
 void TTSComponent::resized()
 {
     auto area = getLocalBounds();
-    //this will be continued when buttons and other items are implemented
+    auto newArea = getLocalBounds();
+    auto newArea2 = getLocalBounds();
 
+    area.setBounds(10, 10, 100, 40);
+    //itty bitty tiny pp button
+    newArea.setBounds(490, 10, 100, 40);
+    //this will be continued when buttons and other items are implemented
+    PPButton.setBounds(area);
+    voiceMenu.setBounds(newArea);
+    
 }
 
 /**
@@ -72,3 +84,17 @@ void TTSComponent::drawButtonBackground(juce::Graphics& g, juce::Button& button,
     g.fillRect (buttonArea);
 }
 
+void TTSComponent::voiceMenuChanged()
+{
+    switch (voiceMenu.getSelectedId())
+    {
+        case 1: //holder
+                break;
+        case 2: //holder
+                break;
+        case 3: //holder
+                break;
+        default: break;
+    }
+
+}
