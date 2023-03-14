@@ -26,7 +26,5 @@ class MSComponent : public juce::Component
     void drawButtonBackground(juce::Graphics&, juce::Button&, const juce::Colour&, bool);
 */
     private:
-    juce::Synthesiser voice;
-
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MSComponent)
 };
