@@ -1,5 +1,8 @@
 #include "WavPlayer.h"
 
+/**
+ * constructor builds audio processor and then registers voices for synths
+ */
 WavPlayer::WavPlayer(): juce::AudioProcessor(BusesProperties().withInput("Input",juce::AudioChannelSet::stereo(),true).withOutput("Output",juce::AudioChannelSet::stereo(),
                                                                                                                                   true))
 {
@@ -11,6 +14,12 @@ WavPlayer::WavPlayer(): juce::AudioProcessor(BusesProperties().withInput("Input"
 WavPlayer::~WavPlayer() noexcept {
     ReaderPtr= nullptr;
 }
+/**
+ * processes midi inputs takes in buffer that will update and process
+ * @TODO make ways to add to midi buffer
+ * @param buffer
+ * @param midiMessages
+ */
 void WavPlayer::processBlock(juce::AudioBuffer<float> &buffer, juce::MidiBuffer &midiMessages) {
     juce::ScopedNoDenormals noDenormals;
     auto totalNumInput= getTotalNumInputChannels();
@@ -20,10 +29,17 @@ void WavPlayer::processBlock(juce::AudioBuffer<float> &buffer, juce::MidiBuffer 
         buffer.clear(i,0,buffer.getNumSamples());
     Voice.renderNextBlock(buffer,midiMessages,0,buffer.getNumSamples());
 }
+/**
+ * readys samples to be played
+ * @param sampleRate
+ * @param samplePerBlock
+ */
 void WavPlayer::prepareToPlay(double sampleRate, int samplePerBlock) {
     Voice.setCurrentPlaybackSampleRate(sampleRate);
-
 }
+/**
+ * creates dialogue box to select file we can change this later to fixed points
+ */
 void WavPlayer::loadFile() {
     juce::FileChooser chooser {"please load a file"};
     auto file = chooser.getResult();
