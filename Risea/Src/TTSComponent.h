@@ -1,7 +1,6 @@
 #pragma once
 
 #include "juce_gui_extra/juce_gui_extra.h"
-
 #include "juce_analytics/juce_analytics.h"
 #include "juce_audio_basics/juce_audio_basics.h"
 #include "juce_audio_devices/juce_audio_devices.h"
@@ -22,6 +21,9 @@ public:
 private:
     juce::TextButton PPButton;
     void PPButtonOnClick(); //for the Play/Pause button Lambda function
+    
+    juce::TextEditor textEditor;
+    void EnterText();
 
 //Testing dropdown
     juce::ComboBox voiceMenu;

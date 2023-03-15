@@ -6,6 +6,8 @@ TTSComponent::TTSComponent() : PPButton("Play/Pause")
 
     addAndMakeVisible(&PPButton);
     addAndMakeVisible(voiceMenu);
+    EnterText();
+
     
     voiceMenu.setTextWhenNothingSelected("Choices");
     voiceMenu.addItem("Voice 1", 1);
@@ -22,8 +24,20 @@ TTSComponent::TTSComponent() : PPButton("Play/Pause")
 //==============================================================================
 void TTSComponent::PPButtonOnClick()
 {
+    
 }
+//==============================================================================
+void TTSComponent:: EnterText()
+{     
+    addAndMakeVisible(textEditor);   
+ 
+    juce::Rectangle<int> textEditorBounds = getLocalBounds().reduced(20, 60);
 
+    textEditor.setText("Enter your text here");
+    textEditor.grabKeyboardFocus();
+
+
+}
 //==============================================================================
 /**
 * paints the basic elements with g graphics object
@@ -53,7 +67,7 @@ void TTSComponent::resized()
     //this will be continued when buttons and other items are implemented
     PPButton.setBounds(area);
     voiceMenu.setBounds(newArea);
-    
+    textEditor.setBounds(newArea2.reduced(20, 60));
 }
 
 /**
