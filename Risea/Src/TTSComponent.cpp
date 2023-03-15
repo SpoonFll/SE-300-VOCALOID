@@ -1,9 +1,9 @@
 #include "TTSComponent.h"
 
 // Buttons etc go here
-TTSComponent::TTSComponent() : PPButton("Play/Pause")
+TTSComponent::TTSComponent() : PPButton("Play/Pause"), audioSource(keyboardState), keyboardComponent(keyboardState,juce::MidiKeyboardComponent::horizontalKeyboard)
 {
-
+    //keyboardState.noteOn(1,1,15);
     addAndMakeVisible(&PPButton);
     addAndMakeVisible(voiceMenu);
     
@@ -11,17 +11,23 @@ TTSComponent::TTSComponent() : PPButton("Play/Pause")
     voiceMenu.addItem("Voice 1", 1);
     voiceMenu.addItem("Voice 2", 2);
     voiceMenu.addItem("Voice 3", 3);
-
     voiceMenu.onChange = [this]
     {
         voiceMenuChanged();
     };
-
-     setSize (600, 400);
+    PPButton.onClick =[this]{
+        PPButtonOnClick();
+    };
+    setMidiInput(0);
+    addAndMakeVisible(keyboardComponent);
+    setAudioChannels(0,2);
+    setSize (600, 400);
+    startTimer(400);
 }
 //==============================================================================
 void TTSComponent::PPButtonOnClick()
 {
+    audioSource.loadFile();//crash button
 }
 
 //==============================================================================
@@ -53,7 +59,8 @@ void TTSComponent::resized()
     //this will be continued when buttons and other items are implemented
     PPButton.setBounds(area);
     voiceMenu.setBounds(newArea);
-    
+
+    keyboardComponent.setBounds(10,40,getWidth()/2,getHeight()/4);
 }
 
 /**
@@ -97,4 +104,28 @@ void TTSComponent::voiceMenuChanged()
         default: break;
     }
 
+}
+
+void TTSComponent::timerCallback() {
+    keyboardComponent.grabKeyboardFocus();
+    stopTimer();
+}
+
+void TTSComponent::setMidiInput(int index) {
+    auto list = juce::MidiInput::getAvailableDevices();
+    deviceManager.removeMidiInputDeviceCallback(list[0].identifier,audioSource.getMidiCollector());
+    auto newInput=list[index];
+    if(!deviceManager.isMidiInputDeviceEnabled(newInput.identifier))
+        deviceManager.setMidiInputDeviceEnabled(newInput.identifier, true);
+    deviceManager.addMidiInputDeviceCallback(newInput.identifier,audioSource.getMidiCollector());
+}
+
+void TTSComponent::releaseResources() {
+}
+
+void TTSComponent::prepareToPlay(int sampleBlocks, double sampleRate) {
+    audioSource.prepareToPlay(sampleBlocks,sampleRate);
+}
+void TTSComponent::getNextAudioBlock(const juce::AudioSourceChannelInfo & buffer) {
+    audioSource.getNextAudioBlock(buffer);
 }
