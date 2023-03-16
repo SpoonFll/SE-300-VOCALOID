@@ -21,7 +21,8 @@ public:
     }
     void loadFile()
     {
-        juce::File file = juce::File("../../VoiceBanks/RISEA_TEST_VOICE_BANK/B4_Power/061.wav");
+        DBG("Loading File");
+        juce::File file = juce::File("/home/jacksonb/Work/Classes/SE300/SE-300-VOCALOID/VoiceBanks/RISEA_TEST_VOICE_BANK/B4_Power/061.wav");
         DBG("File loaded");
         Reader = Manager.createReaderFor(file);
         juce::BigInteger range;
@@ -33,7 +34,6 @@ public:
     void releaseResources() override{}
     void getNextAudioBlock(const juce::AudioSourceChannelInfo &bufferToFill) override
     {
-        DBG("new block");
         bufferToFill.clearActiveBufferRegion();
 
         juce::MidiBuffer incomingMidi;
