@@ -23,11 +23,11 @@ TTSComponent::TTSComponent() : PPButton("Play/Pause"), audioSource(keyboardState
     setAudioChannels(0,2);
     setSize (600, 400);
     startTimer(400);
+    audioSource.loadFile();//loads files
 }
 //==============================================================================
 void TTSComponent::PPButtonOnClick()
 {
-    audioSource.loadFile();//crash button
 }
 
 //==============================================================================
