@@ -3,7 +3,9 @@
 #include "juce_audio_devices/juce_audio_devices.h"
 #include "juce_audio_processors/juce_audio_processors.h"
 #include "juce_audio_utils/juce_audio_utils.h"
-
+/**
+ * settings data type for the time settings for individual samples
+ */
 struct settings {
     float offset;
     float consonant;
@@ -15,6 +17,11 @@ struct settings {
 class SynthAudioSource: public juce::AudioSource
 {
 public:
+    /**
+     * constructor for the audio source
+     * takes in a midi key state to determine when a midi even happens
+     * @param keyState
+     */
     SynthAudioSource(juce::MidiKeyboardState &keyState): keyboardState(keyState)
     {
         Manager.registerBasicFormats();
@@ -22,11 +29,18 @@ public:
             Voice.addVoice(new juce::SamplerVoice());
         //loadFile();
     }
+    /**
+     * prepares samples for play making sure the sample reate is correct
+     * @param sampleRate
+     */
     void prepareToPlay(int, double sampleRate) override
     {
         Voice.setCurrentPlaybackSampleRate(sampleRate);
         midiCollector.reset(sampleRate);
     }
+    /**
+     * loads all files for a voice into a hashtable to make converting strings to sounds easier
+     */
     void loadFile()
     {
         DBG("Loading File");
@@ -71,8 +85,13 @@ public:
         Voice.addSound(new juce::SamplerSound("Sample", *Reader,range,67,wordsToSounds["llth-G4"].consonant/1000,wordsToSounds["llth-G4"].preutterance/1000,wordsToSounds["llth-G4"].overlap));
 
 
+
     }
     void releaseResources() override{}
+    /**
+     * processes the sampler and midi events to convert to audio
+     * @param bufferToFill
+     */
     void getNextAudioBlock(const juce::AudioSourceChannelInfo &bufferToFill) override
     {
         bufferToFill.clearActiveBufferRegion();
@@ -81,6 +100,10 @@ public:
         keyboardState.processNextMidiBuffer(incomingMidi,bufferToFill.startSample,bufferToFill.numSamples,true);
         Voice.renderNextBlock(*bufferToFill.buffer,incomingMidi,bufferToFill.startSample,bufferToFill.numSamples);
     }
+    /**
+     * midi collector
+     * @return
+     */
     juce::MidiMessageCollector* getMidiCollector()
     {
         return &midiCollector;
@@ -94,4 +117,14 @@ private:
     juce::AudioFormatReader* Reader{nullptr};
     juce::MidiMessageCollector midiCollector;
 
+};
+/**
+ * variant of the sampler sound
+ * @TODO implement functions for proper cutting of values
+ */
+class VoiceClip: public juce::SynthesiserSound
+{
+    VoiceClip(){
+
+    }
 };
