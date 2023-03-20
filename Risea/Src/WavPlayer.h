@@ -44,7 +44,8 @@ public:
     void loadFile()
     {
         DBG("Loading File");
-        juce::File file = juce::File("/home/jacksonb/Work/Classes/SE300/SE-300-VOCALOID/VoiceBanks/RISEA_TEST_VOICE_BANK");
+        juce::File file = juce::File::getSpecialLocation(juce::File::SpecialLocationType::currentApplicationFile).getParentDirectory().getParentDirectory().getParentDirectory().getParentDirectory().getParentDirectory().getChildFile("VoiceBanks").getChildFile("RISEA_TEST_VOICE_BANK");
+        DBG(file.getFullPathName());
         DBG("File loaded");
         //juce::File speakPower =file.getChildFile("B4_Power");
         //juce::File speakPowerConfig = speakPower.getChildFile("oto.ini");
