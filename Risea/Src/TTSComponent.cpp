@@ -3,7 +3,6 @@
 // Buttons etc go here
 TTSComponent::TTSComponent() : PPButton("Play/Pause")
 {
-
     addAndMakeVisible(&PPButton);
     addAndMakeVisible(voiceMenu);
     

@@ -14,25 +14,27 @@
 #include "juce_audio_devices/juce_audio_devices.h"
 #include "juce_audio_processors/juce_audio_processors.h"
 #include "juce_audio_utils/juce_audio_utils.h"
+#include "MSComponent.h"
+#include "TTSComponent.h"
+#include "MainComponent.h"
 
 class HelpComponent : public juce::Component
         {
 public:
     HelpComponent();
-    ~HelpComponent();//this is needed
-    /**
-     * decrunched the code need to impletment these to see functions
-     * windows will still be black without this
-     */
-    //void paint(juce::Graphics &) override;
-
-    //void resized() override;
-
-    //void drawButtonBackground(juce::Graphics &, juce::Button &, const juce::Colour &, bool);
+    void paint(juce::Graphics &) override;
+    void resized() override;
+    void drawButtonBackground(juce::Graphics &, juce::Button &, const juce::Colour &, bool);
 
 
 private:
-    juce::TextButton testButton;
+    juce::TextButton MSButton;
+    std::unique_ptr<MSwindow> Mswindow;
+    void MSButtonOnClick();
+
+    juce::TextButton TTSButton;
+    std::unique_ptr<TTSwindow> TtsWindow;
+    void TTSButtonOnClick();
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (HelpComponent)
 };//forgor semicolon

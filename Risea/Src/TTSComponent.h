@@ -27,8 +27,6 @@ private:
     juce::ComboBox voiceMenu;
     //SynthsizerVoice might be sampler
     juce::Synthesiser voiceChoice;
-   // Component::SafePointer<juce::TopLevelWindow> TTSWindow;
-    //void voiceMenuOnclick
 
     Component::SafePointer<juce::TopLevelWindow> TTSwindow;
     void testButtonOnClick(); //for the test button Lambda function
