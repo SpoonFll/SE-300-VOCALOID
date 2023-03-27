@@ -27,7 +27,7 @@ public:
     void insMenuChanged();
     void releaseResources() override;
     void prepareToPlay(int, double) override;
-    void getNextAudoBlock(const juce::AudioSourceChannelInfo&);
+    void getNextAudioBlock(const juce::AudioSourceChannelInfo&);
     
 private:
     juce::TextButton PPButton;

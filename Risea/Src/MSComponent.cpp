@@ -1,6 +1,6 @@
 #include "MSComponent.h"
 
-MSComponent::MSComponent() : PPButton("Play/Pause"), audoSource(KeyboardState), keyboardComponent(keyboardState, juce::MidiKeyboardComponent::verticalKeyboardFacingRight)
+MSComponent::MSComponent() : PPButton("Play/Pause"), audioSource(keyboardState), keyboardComponent(keyboardState, juce::MidiKeyboardComponent::verticalKeyboardFacingRight)
 {
     addAndMakeVisible(&PPButton);
     addAndMakeVisible(insMenu);
@@ -26,7 +26,7 @@ MSComponent::MSComponent() : PPButton("Play/Pause"), audoSource(KeyboardState), 
     //setting up piano
     setMidiInput(0);
     addAndMakeVisible(keyboardComponent);
-    setAudioCHannels(0,2);
+    setAudioChannels(0,2);
     setSize (600, 400);
     startTimer(400);
     audioSource.loadFile();
@@ -55,7 +55,7 @@ void MSComponent::resized()
 
     PPButton.setBounds(area);
     insMenu.setBounds(newArea);
-    keyboardComponent.setbounds(10, 100, getWidth()/2, getHeight()/4);
+    keyboardComponent.setBounds(10, 100, getWidth()/2, getHeight()/4);
 }
 //================================================================
 /**
