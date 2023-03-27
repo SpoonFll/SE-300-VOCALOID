@@ -1,10 +1,11 @@
 #include "MSComponent.h"
 
-MSComponent::MSComponent() : PPButton("Play/Pause")
+MSComponent::MSComponent() : PPButton("Play/Pause"), audoSource(KeyboardState), keyboardComponent(keyboardState, juce::MidiKeyboardComponent::verticalKeyboardFacingRight)
 {
     addAndMakeVisible(&PPButton);
     addAndMakeVisible(insMenu);
 
+    //setting up dropdown for instruments
     insMenu.setTextWhenNothingSelected("Choices");
     insMenu.addItem("Instrument 1", 1);
     insMenu.addItem("Instrument 2", 2);
@@ -15,7 +16,21 @@ MSComponent::MSComponent() : PPButton("Play/Pause")
         insMenuChanged();
     };
 
+
+    //setting PP Button Actions
+    PPButton.onClick = [this]
+    {
+        PPButtonOnClick();
+    };
+
+    //setting up piano
+    setMidiInput(0);
+    addAndMakeVisible(keyboardComponent);
+    setAudioCHannels(0,2);
     setSize (600, 400);
+    startTimer(400);
+    audioSource.loadFile();
+
 }
 //==============================================================================
 /**
@@ -40,6 +55,7 @@ void MSComponent::resized()
 
     PPButton.setBounds(area);
     insMenu.setBounds(newArea);
+    keyboardComponent.setbounds(10, 100, getWidth()/2, getHeight()/4);
 }
 //================================================================
 /**
@@ -73,6 +89,7 @@ void MSComponent::drawButtonBackground(juce::Graphics& g, juce::Button& button, 
 //================================================================
 void MSComponent::PPButtonOnClick()
 {
+
 }
 //================================================================
 void MSComponent::insMenuChanged()
@@ -87,4 +104,35 @@ void MSComponent::insMenuChanged()
         break;
     default: break;
     }
+}
+//================================================================
+void MSComponent::timerCallback() 
+{
+    keyboardComponent.grabKeyboardFocus();
+    stopTimer();
+}
+//================================================================
+void MSComponent::setMidiInput(int index)
+{
+    auto list = juce::MidiInput::getAvailableDevices();
+    deviceManager.removeMidiInputDeviceCallback(list[0].identifier, audioSource.getMidiCollector());
+    auto newInput = list[index];
+    if (!deviceManager.isMidiInputDeviceEnabled(newInput.identifier))
+        deviceManager.setMidiInputDeviceEnabled(newInput.identifier, true);
+    deviceManager.addMidiInputDeviceCallback(newInput.identifier, audioSource.getMidiCollector());
+}
+//================================================================
+void MSComponent::releaseResources()
+{
+
+}
+//================================================================
+void MSComponent::prepareToPlay(int sampleBlocks, double sampleRate)
+{
+    audioSource.prepareToPlay(sampleBlocks, sampleRate);
+}
+//================================================================
+void MSComponent::getNextAudioBlock(const juce::AudioSourceChannelInfo& buffer)
+{
+    audioSource.getNextAudioBlock(buffer);
 }
