@@ -70,6 +70,8 @@ target_sources(GuiAppExample
         Src/MSComponent.cpp
         Src/TTSComponent.h
         Src/TTSComponent.cpp
+        Src/WavPlayer.cpp
+        Src/WavPlayer.h
         )
 
 

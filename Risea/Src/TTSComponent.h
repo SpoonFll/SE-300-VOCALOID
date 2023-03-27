@@ -6,9 +6,10 @@
 #include "juce_audio_devices/juce_audio_devices.h"
 #include "juce_audio_processors/juce_audio_processors.h"
 #include "juce_audio_utils/juce_audio_utils.h"
-
+#include "WavPlayer.h"
 //================================================================
-class TTSComponent : public juce::Component
+class TTSComponent : public juce::AudioAppComponent,
+private juce::Timer
 {
 public:
     TTSComponent();
@@ -17,6 +18,10 @@ public:
     void drawButtonBackground(juce::Graphics&, juce::Button&, const juce::Colour&, bool);
 //Testing Drop Down 
     void voiceMenuChanged();
+    void releaseResources() override;
+    void prepareToPlay(int, double) override;
+    void getNextAudioBlock(const juce::AudioSourceChannelInfo&) override;
+
 
 private:
     juce::TextButton PPButton;
@@ -27,12 +32,15 @@ private:
 
 //Testing dropdown
     juce::ComboBox voiceMenu;
-    //SynthsizerVoice might be sampler
-    juce::Synthesiser voiceChoice;
-   // Component::SafePointer<juce::TopLevelWindow> TTSWindow;
-    //void voiceMenuOnclick
+    void testButtonOnClick(); //for the test button Lambda function
 
-    Component::SafePointer<juce::TopLevelWindow> TTSwindow;
+    void timerCallback() override;
+    void setMidiInput(int index);
+
+    SynthAudioSource audioSource;
+    juce::MidiKeyboardState keyboardState;
+    juce::MidiKeyboardComponent keyboardComponent;
+
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(TTSComponent)
 };
