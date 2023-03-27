@@ -6,6 +6,8 @@ TTSComponent::TTSComponent() : PPButton("Play/Pause"), audioSource(keyboardState
     //keyboardState.noteOn(1,1,15);
     addAndMakeVisible(&PPButton);
     addAndMakeVisible(voiceMenu);
+    EnterText();
+
     
     voiceMenu.setTextWhenNothingSelected("Choices");
     voiceMenu.addItem("Voice 1", 1);
@@ -28,8 +30,20 @@ TTSComponent::TTSComponent() : PPButton("Play/Pause"), audioSource(keyboardState
 //==============================================================================
 void TTSComponent::PPButtonOnClick()
 {
+    
 }
+//==============================================================================
+void TTSComponent:: EnterText()
+{     
+    addAndMakeVisible(textEditor);   
+ 
+    juce::Rectangle<int> textEditorBounds = getLocalBounds().reduced(20, 60);
 
+    textEditor.setText("Enter your text here");
+    textEditor.grabKeyboardFocus();
+
+
+}
 //==============================================================================
 /**
 * paints the basic elements with g graphics object
@@ -59,6 +73,8 @@ void TTSComponent::resized()
     //this will be continued when buttons and other items are implemented
     PPButton.setBounds(area);
     voiceMenu.setBounds(newArea);
+
+    textEditor.setBounds(newArea2.reduced(20, 60));
 
     keyboardComponent.setBounds(10,40,getWidth()/2,getHeight()/4);
 }
