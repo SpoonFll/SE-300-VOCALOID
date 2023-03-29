@@ -55,7 +55,7 @@ void MSComponent::resized()
 
     PPButton.setBounds(area);
     insMenu.setBounds(newArea);
-    keyboardComponent.setBounds(10, 100, getWidth()/2, getHeight()/4);
+    keyboardComponent.setBounds(10, 200, getWidth()/2, getHeight()/4);
 }
 //================================================================
 /**

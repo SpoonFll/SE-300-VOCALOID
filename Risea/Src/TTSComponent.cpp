@@ -1,7 +1,7 @@
 #include "TTSComponent.h"
 
 // Buttons etc go here
-TTSComponent::TTSComponent() : PPButton("Play/Pause")/*, audioSource(keyboardState), keyboardComponent(keyboardState,juce::MidiKeyboardComponent::horizontalKeyboard) */
+TTSComponent::TTSComponent() : PPButton("Play/Pause"), audioSource(keyboardState), keyboardComponent(keyboardState,juce::MidiKeyboardComponent::horizontalKeyboard) 
 {
     //keyboardState.noteOn(1,1,15);
     addAndMakeVisible(&PPButton);
@@ -121,7 +121,7 @@ void TTSComponent::voiceMenuChanged()
     }
 
 }
-/*
+
 void TTSComponent::timerCallback() {
     keyboardComponent.grabKeyboardFocus();
     stopTimer();
@@ -145,4 +145,3 @@ void TTSComponent::prepareToPlay(int sampleBlocks, double sampleRate) {
 void TTSComponent::getNextAudioBlock(const juce::AudioSourceChannelInfo & buffer) {
     audioSource.getNextAudioBlock(buffer);
 }
-*/
