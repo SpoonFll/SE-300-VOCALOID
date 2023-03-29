@@ -51,11 +51,11 @@ void MSComponent::resized()
     auto newArea = getLocalBounds();
 
     area.setBounds(10, 10, 100, 40);
-    newArea.setBounds(490, 10, 100, 40);
+    newArea.setBounds(1100, 10, 100, 40);
 
     PPButton.setBounds(area);
     insMenu.setBounds(newArea);
-    keyboardComponent.setBounds(10, 200, getWidth()/2, getHeight()/4);
+    keyboardComponent.setBounds(5, 490, getWidth()/3, getHeight()/3);
 }
 //================================================================
 /**
