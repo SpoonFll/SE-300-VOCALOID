@@ -85,7 +85,7 @@ public:
         juce::BigInteger range;
         range.setRange(0,128,true);
         DBG(wordsToSounds["llth-G4"].cutoff);
-        Voice.addSound(new juce::SamplerSound("Sample", *Reader,range,67,wordsToSounds["llth-G4"].consonant/1000,wordsToSounds["llth-G4"].preutterance/1000,-1*wordsToSounds["llth-G4"].cutoff/1000,wordsToSounds["llth-G4"].offset-100));
+        Voice.addSound(new juce::SamplerSound("Sample", *Reader,range,67,wordsToSounds["llth-G4"].consonant/1000,wordsToSounds["llth-G4"].preutterance/1000,-1*wordsToSounds["llth-G4"].cutoff/1000,wordsToSounds["llth-G4"].offset));
 
 
 
