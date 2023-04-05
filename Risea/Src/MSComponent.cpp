@@ -67,7 +67,7 @@ void MSComponent::resized()
     newArea.setBounds(1100, 10, 100, 40);
     pArea.setBounds(5, 490, getWidth()/3, getHeight()/3);
     pSliderArea.setBounds(375, 325, 700, 200);
-    mSliderArea.setBounds(10, 50, getWidth()/3, getHeight()/3);
+    mSliderArea.setBounds(130, 10, getWidth()/3, 30);
 
     PPButton.setBounds(area);
     insMenu.setBounds(newArea);
