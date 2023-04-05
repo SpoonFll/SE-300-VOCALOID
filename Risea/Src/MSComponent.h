@@ -44,6 +44,11 @@ private:
     juce::MidiKeyboardState keyboardState;
     juce::MidiKeyboardComponent keyboardComponent;
 
+    //Testing the slider :)))
+    juce::Slider pVolumeSlider;
+    juce::Slider mVolumeSlider;
+    
+
     Component::SafePointer<juce::TopLevelWindow> MSWindow;
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MSComponent)
 };

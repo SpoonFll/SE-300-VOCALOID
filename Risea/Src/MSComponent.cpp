@@ -31,6 +31,15 @@ MSComponent::MSComponent() : PPButton("Play/Pause"), audioSource(keyboardState),
     startTimer(400);
     audioSource.loadFile();
 
+    addAndMakeVisible(pVolumeSlider);
+    pVolumeSlider.setRange(0, 100);
+    pVolumeSlider.setTextValueSuffix(" Hz");
+
+    addAndMakeVisible(mVolumeSlider);
+    mVolumeSlider.setRange(0, 100);
+    pVolumeSlider.setTextValueSuffix(" Hz");
+
+
 }
 //==============================================================================
 /**
@@ -49,13 +58,23 @@ void MSComponent::resized()
 {
     auto area = getLocalBounds();
     auto newArea = getLocalBounds();
+    auto pArea = getLocalBounds();
+    auto pSliderArea = getLocalBounds();
+    auto mSliderArea = getLocalBounds();
+
 
     area.setBounds(10, 10, 100, 40);
     newArea.setBounds(1100, 10, 100, 40);
+    pArea.setBounds(5, 490, getWidth()/3, getHeight()/3);
+    pSliderArea.setBounds(375, 325, 700, 200);
+    mSliderArea.setBounds(10, 50, getWidth()/3, getHeight()/3);
 
     PPButton.setBounds(area);
     insMenu.setBounds(newArea);
-    keyboardComponent.setBounds(5, 490, getWidth()/3, getHeight()/3);
+    keyboardComponent.setBounds(pArea);
+
+    pVolumeSlider.setBounds(pSliderArea);
+    mVolumeSlider.setBounds(mSliderArea);
 }
 //================================================================
 /**
