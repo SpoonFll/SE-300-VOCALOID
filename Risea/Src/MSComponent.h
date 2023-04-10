@@ -44,9 +44,22 @@ private:
     juce::MidiKeyboardState keyboardState;
     juce::MidiKeyboardComponent keyboardComponent;
 
-    //Testing the slider :)))
     juce::Slider pVolumeSlider;
     juce::Slider mVolumeSlider;
+    juce::Slider vmSlider;
+    juce::Slider inst1Slider;
+    juce::Slider inst2Slider;
+    juce::Slider inst3Slider;
+
+    juce::ComboBox vmMenu;
+    juce::ComboBox inst1Menu;
+    juce::ComboBox inst2Menu;
+    juce::ComboBox inst3Menu;
+
+    juce::TextButton voiceModule;
+    juce::TextButton instModule1;
+    juce::TextButton instModule2;
+    juce::TextButton instModule3;
     
 
     Component::SafePointer<juce::TopLevelWindow> MSWindow;

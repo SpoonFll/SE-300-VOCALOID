@@ -39,6 +39,11 @@ MSComponent::MSComponent() : PPButton("Play/Pause"), audioSource(keyboardState),
     mVolumeSlider.setRange(0, 100);
     pVolumeSlider.setTextValueSuffix(" Hz");
 
+    addAndMakeVisible(voiceModule);
+    addAndMakeVisible(instModule1);
+    addAndMakeVisible(instModule2);
+    addAndMakeVisible(instModule3);
+
 
 }
 //==============================================================================
@@ -59,15 +64,42 @@ void MSComponent::resized()
     auto area = getLocalBounds();
     auto newArea = getLocalBounds();
     auto pArea = getLocalBounds();
+
+    //Piano and Master Volume Sliders
     auto pSliderArea = getLocalBounds();
     auto mSliderArea = getLocalBounds();
 
+    //Module Volume Sliders
+    auto vmSliderArea = getLocalBounds();
+    auto inst1SliderArea = getLocalBounds();
+    auto inst2SliderArea = getLocalBounds();
+    auto inst3SliderArea = getLocalBounds();
 
-    area.setBounds(10, 10, 100, 40);
+    //Module Areas
+    auto vModArea1 = getLocalBounds();
+    auto iModArea1 = getLocalBounds();
+    auto iModArea2 = getLocalBounds();
+    auto iModArea3 = getLocalBounds();
+
+    //Drop Down Module Areas
+    auto vModDDArea1 = getLocalBounds();
+    auto iModDDArea1 = getLocalBounds();
+    auto iModDDArea2 = getLocalBounds();
+    auto iModDDArea3 = getLocalBounds();
+
+
+    area.setBounds(5, 10, 100, 40);
     newArea.setBounds(1100, 10, 100, 40);
-    pArea.setBounds(5, 490, getWidth()/3, getHeight()/3);
-    pSliderArea.setBounds(375, 325, 700, 200);
+    pArea.setBounds(5, 440, getWidth()/3, getHeight()/2);
+
+    pSliderArea.setBounds(5, 410, getWidth(), 30);
     mSliderArea.setBounds(130, 10, getWidth()/3, 30);
+
+    vModArea1.setBounds(5, 50, getWidth()/6, getHeight()/8);
+    iModArea1.setBounds(5, 140, getWidth()/6, getHeight()/8);
+    iModArea2.setBounds(5, 230, getWidth()/6, getHeight()/8);
+    iModArea3.setBounds(5, 320, getWidth()/6, getHeight()/8);
+
 
     PPButton.setBounds(area);
     insMenu.setBounds(newArea);
@@ -75,6 +107,13 @@ void MSComponent::resized()
 
     pVolumeSlider.setBounds(pSliderArea);
     mVolumeSlider.setBounds(mSliderArea);
+
+    voiceModule.setBounds(vModArea1);
+    instModule1.setBounds(iModArea1);
+    instModule2.setBounds(iModArea2);
+    instModule3.setBounds(iModArea3);
+
+
 }
 //================================================================
 /**
