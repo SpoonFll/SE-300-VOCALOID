@@ -25,6 +25,9 @@ public:
     void resized() override;
     void drawButtonBackground(juce::Graphics&, juce::Button&, const juce::Colour&, bool);
     void insMenuChanged();
+    void inst1ChoiceChanged();
+    void inst2ChoiceChanged();
+    void inst3ChoiceChanged();
     void releaseResources() override;
     void prepareToPlay(int, double) override;
     void getNextAudioBlock(const juce::AudioSourceChannelInfo&);
@@ -59,7 +62,6 @@ private:
     juce::ComboBox inst1Menu;
     juce::ComboBox inst2Menu;
     juce::ComboBox inst3Menu;
-    juce::ComboBox vmChoice;
     juce::ComboBox inst1Choice;
     juce::ComboBox inst2Choice;
     juce::ComboBox inst3Choice;
@@ -68,6 +70,7 @@ private:
     juce::TextButton instModule1;
     juce::TextButton instModule2;
     juce::TextButton instModule3;
+    juce::TextButton vmChoice;
       
 
     Component::SafePointer<juce::TopLevelWindow> MSWindow;

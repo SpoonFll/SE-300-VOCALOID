@@ -4,7 +4,12 @@ MSComponent::MSComponent() : PPButton("Play/Pause"), audioSource(keyboardState),
 {
     addAndMakeVisible(&PPButton);
     addAndMakeVisible(insMenu);
+   // addAndMakeVisible(vmChoice);
+    addAndMakeVisible(inst1Choice);
+   // addAndMakeVisible(inst2Choice);
+    //addAndMakeVisible(inst3Choice);
 
+//==============================================================================
     //setting up dropdown for instruments
     insMenu.setTextWhenNothingSelected("Choices");
     insMenu.addItem("Instrument 1", 1);
@@ -15,14 +20,44 @@ MSComponent::MSComponent() : PPButton("Play/Pause"), audioSource(keyboardState),
     {
         insMenuChanged();
     };
+//==============================================================================
+    //Dropdown for instrument choices
+    inst1Choice.setTextWhenNothingSelected("Choices");
+    inst1Choice.addItem("Drums", 1);
+    inst1Choice.addItem("Guitar", 2);
+    inst1Choice.addItem("Synth", 3);
 
+    inst1Choice.onChange = [this]
+    {
+        inst1ChoiceChanged();
+    };
 
+    inst2Choice.setTextWhenNothingSelected("Choices");
+    inst2Choice.addItem("Drums", 1);
+    inst2Choice.addItem("Guitar", 2);
+    inst2Choice.addItem("Synth", 3);
+
+    inst2Choice.onChange = [this]
+    {
+        inst2ChoiceChanged();
+    };
+
+    inst3Choice.setTextWhenNothingSelected("Choices");
+    inst3Choice.addItem("Drums", 1);
+    inst3Choice.addItem("Guitar", 2);
+    inst3Choice.addItem("Synth", 3);
+
+    inst3Choice.onChange = [this]
+    {
+        inst3ChoiceChanged();
+    };
+//==============================================================================
     //setting PP Button Actions
     PPButton.onClick = [this]
     {
         PPButtonOnClick();
     };
-
+//==============================================================================
     //setting up piano
     setMidiInput(0);
     addAndMakeVisible(keyboardComponent);
@@ -30,7 +65,7 @@ MSComponent::MSComponent() : PPButton("Play/Pause"), audioSource(keyboardState),
     setSize (600, 400);
     startTimer(400);
     audioSource.loadFile();
-
+//==============================================================================
     addAndMakeVisible(pVolumeSlider);
     pVolumeSlider.setRange(0, 100);
     pVolumeSlider.setTextValueSuffix(" Hz");
@@ -43,7 +78,7 @@ MSComponent::MSComponent() : PPButton("Play/Pause"), audioSource(keyboardState),
     addAndMakeVisible(instModule1);
     addAndMakeVisible(instModule2);
     addAndMakeVisible(instModule3);
-
+//==============================================================================
 
 }
 //==============================================================================
@@ -102,7 +137,6 @@ void MSComponent::resized()
 
 
     PPButton.setBounds(area);
-    insMenu.setBounds(newArea);
     keyboardComponent.setBounds(pArea);
 
     pVolumeSlider.setBounds(pSliderArea);
@@ -112,6 +146,12 @@ void MSComponent::resized()
     instModule1.setBounds(iModArea1);
     instModule2.setBounds(iModArea2);
     instModule3.setBounds(iModArea3);
+
+    insMenu.setBounds(newArea);
+    inst1Choice.setBounds(7, 52, (getWidth()/6) - 4, getHeight()/16);
+    //inst2Choice.setBounds();
+   // inst3Choice.setBounds();
+
 
 
 }
@@ -161,6 +201,48 @@ void MSComponent::insMenuChanged()
     case 3: //holder
         break;
     default: break;
+    }
+}
+//================================================================
+void MSComponent::inst1ChoiceChanged()
+{
+    switch (inst1Choice.getSelectedId())
+    {
+        case 1:
+            break;
+        case 2:
+            break;
+        case 3:
+             break;
+        default: break;
+    }
+}
+//================================================================
+void MSComponent::inst2ChoiceChanged()
+{
+    switch (inst2Choice.getSelectedId())
+    {
+        case 1:
+            break;
+        case 2:
+            break;
+        case 3:
+            break;
+        default: break;
+    }
+}
+//================================================================
+void MSComponent::inst3ChoiceChanged()
+{
+    switch (inst3Choice.getSelectedId())
+    {
+        case 1:
+            break;
+        case 2:
+            break;
+        case 3:
+            break;
+        default: break;
     }
 }
 //================================================================
