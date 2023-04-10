@@ -59,15 +59,16 @@ private:
     juce::ComboBox inst1Menu;
     juce::ComboBox inst2Menu;
     juce::ComboBox inst3Menu;
+    juce::ComboBox vmChoice;
+    juce::ComboBox inst1Choice;
+    juce::ComboBox inst2Choice;
+    juce::ComboBox inst3Choice;
 
-    juce::TextButton voiceModule;
-        juce::TextButton vmChoice;
+    juce::TextButton voiceModule; 
     juce::TextButton instModule1;
-        juce::TextButton inst1Choice;
     juce::TextButton instModule2;
-        juce::TextButton inst2Choice;
     juce::TextButton instModule3;
-        juce::TextButton inst3Choice;
+      
 
     Component::SafePointer<juce::TopLevelWindow> MSWindow;
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MSComponent)
