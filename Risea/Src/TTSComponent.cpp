@@ -57,7 +57,7 @@ void TTSComponent::paint (juce::Graphics& g)
     g.setColour (juce::Colours::white);
     g.drawText ("Text to Speech", getLocalBounds(), juce::Justification::centredTop, true);
 }
-/**
+/*
  * adds visibility of buttons
  * @TODO implement buttons
  */

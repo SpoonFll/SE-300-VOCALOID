@@ -24,15 +24,21 @@ public:
      * decrunched the code need to impletment these to see functions
      * windows will still be black without this
      */
-    //void paint(juce::Graphics &) override;
+    void paint(juce::Graphics &) override;
 
-    //void resized() override;
+    void resized() override;
 
     //void drawButtonBackground(juce::Graphics &, juce::Button &, const juce::Colour &, bool);
 
 
 private:
     juce::TextButton testButton;
+    juce::TextButton button1;
+    juce::TextButton button2;
+
+    juce::TextEditor textEditor1;
+    juce::TextEditor textEditor2;
+
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (HelpComponent)
 };//forgor semicolon
