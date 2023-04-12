@@ -81,6 +81,14 @@ MSComponent::MSComponent() : PPButton("Play/Pause"), audioSource(keyboardState),
     addAndMakeVisible(inst2Choice);
     addAndMakeVisible(inst3Choice);
 //==============================================================================
+    for(int i =0;i<25;i++)
+    {
+        for(int j=0;j<50;j++)
+        {
+            addAndMakeVisible(notes[i][j]);
+
+        }
+    }
 
 }
 //==============================================================================
@@ -155,6 +163,17 @@ void MSComponent::resized()
     inst2Choice.setBounds(7, 232, (getWidth()/6) - 4, getHeight()/16);
     inst3Choice.setBounds(7, 322, (getWidth()/6) - 4, getHeight()/16);
 
+   auto buttonArea = getLocalBounds();
+   buttonArea.setBounds(getWidth()/3,440,30,30);
+    for(int i =0;i<25;i++)
+    {
+        for(int j=0;j<50;j++)
+        {
+            notes[i][j].setBounds(buttonArea);
+            buttonArea.setBounds(buttonArea.getX()+buttonArea.getWidth(),buttonArea.getY(),buttonArea.getWidth(),buttonArea.getHeight());
+        }
+        buttonArea.setBounds(getWidth()/3,buttonArea.getY()+buttonArea.getHeight(),buttonArea.getWidth(),buttonArea.getHeight());
+    }
 
 
 }

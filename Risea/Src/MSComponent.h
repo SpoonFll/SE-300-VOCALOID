@@ -71,6 +71,8 @@ private:
     juce::TextButton instModule2;
     juce::TextButton instModule3;
     juce::TextButton vmChoice;
+
+    juce::ToggleButton notes[25][50];
       
 
     Component::SafePointer<juce::TopLevelWindow> MSWindow;
