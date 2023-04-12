@@ -164,10 +164,10 @@ void MSComponent::resized()
     inst3Choice.setBounds(7, 322, (getWidth()/6) - 4, getHeight()/16);
 
    auto buttonArea = getLocalBounds();
-   buttonArea.setBounds(getWidth()/3,440,30,30);
-    for(int i =0;i<25;i++)
+   buttonArea.setBounds(getWidth()/3,455, 20, keyboardComponent.getKeyWidth());
+    for(int i =0;i<20;i++)
     {
-        for(int j=0;j<50;j++)
+        for(int j=0;j<40;j++)
         {
             notes[i][j].setBounds(buttonArea);
             buttonArea.setBounds(buttonArea.getX()+buttonArea.getWidth(),buttonArea.getY(),buttonArea.getWidth(),buttonArea.getHeight());
