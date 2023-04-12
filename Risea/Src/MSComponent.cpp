@@ -4,10 +4,7 @@ MSComponent::MSComponent() : PPButton("Play/Pause"), audioSource(keyboardState),
 {
     addAndMakeVisible(&PPButton);
     addAndMakeVisible(insMenu);
-   // addAndMakeVisible(vmChoice);
-    addAndMakeVisible(inst1Choice);
-   // addAndMakeVisible(inst2Choice);
-    //addAndMakeVisible(inst3Choice);
+   
 
 //==============================================================================
     //setting up dropdown for instruments
@@ -78,6 +75,11 @@ MSComponent::MSComponent() : PPButton("Play/Pause"), audioSource(keyboardState),
     addAndMakeVisible(instModule1);
     addAndMakeVisible(instModule2);
     addAndMakeVisible(instModule3);
+
+    // addAndMakeVisible(vmChoice);
+    addAndMakeVisible(inst1Choice);
+    addAndMakeVisible(inst2Choice);
+    addAndMakeVisible(inst3Choice);
 //==============================================================================
 
 }
@@ -136,6 +138,7 @@ void MSComponent::resized()
     iModArea3.setBounds(5, 320, getWidth()/6, getHeight()/8);
 
 
+
     PPButton.setBounds(area);
     keyboardComponent.setBounds(pArea);
 
@@ -148,9 +151,9 @@ void MSComponent::resized()
     instModule3.setBounds(iModArea3);
 
     insMenu.setBounds(newArea);
-    inst1Choice.setBounds(7, 52, (getWidth()/6) - 4, getHeight()/16);
-    //inst2Choice.setBounds();
-   // inst3Choice.setBounds();
+    inst1Choice.setBounds(7, 142, (getWidth()/6) - 4, getHeight()/16);
+    inst2Choice.setBounds(7, 232, (getWidth()/6) - 4, getHeight()/16);
+    inst3Choice.setBounds(7, 322, (getWidth()/6) - 4, getHeight()/16);
 
 
 
