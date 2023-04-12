@@ -1,7 +1,7 @@
 #include "TTSComponent.h"
 
 // Buttons etc go here
-TTSComponent::TTSComponent() : PPButton("Play/Pause"), audioSource(keyboardState), keyboardComponent(keyboardState,juce::MidiKeyboardComponent::horizontalKeyboard)
+TTSComponent::TTSComponent() : PPButton("Play/Pause"), audioSource(keyboardState), keyboardComponent(keyboardState,juce::MidiKeyboardComponent::horizontalKeyboard) 
 {
     //keyboardState.noteOn(1,1,15);
     addAndMakeVisible(&PPButton);
@@ -20,12 +20,12 @@ TTSComponent::TTSComponent() : PPButton("Play/Pause"), audioSource(keyboardState
     PPButton.onClick =[this]{
         PPButtonOnClick();
     };
-    setMidiInput(0);
+    /*setMidiInput(0);
     addAndMakeVisible(keyboardComponent);
     setAudioChannels(0,2);
     setSize (600, 400);
     startTimer(400);
-    audioSource.loadFile();//loads files
+    audioSource.loadFile();//loads files */
 }
 //==============================================================================
 void TTSComponent::PPButtonOnClick()
@@ -76,7 +76,7 @@ void TTSComponent::resized()
 
     textEditor.setBounds(newArea2.reduced(20, 60));
 
-    keyboardComponent.setBounds(10,40,getWidth()/2,getHeight()/4);
+   // keyboardComponent.setBounds(10,40,getWidth()/2,getHeight()/4);
 }
 
 /**

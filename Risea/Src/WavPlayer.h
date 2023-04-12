@@ -1,3 +1,4 @@
+#pragma once
 #include "juce_analytics/juce_analytics.h"
 #include "juce_audio_basics/juce_audio_basics.h"
 #include "juce_audio_devices/juce_audio_devices.h"
@@ -83,7 +84,8 @@ public:
         Reader = Manager.createReaderFor(wordsToSounds["llth-G4"].soundFile);
         juce::BigInteger range;
         range.setRange(0,128,true);
-        Voice.addSound(new juce::SamplerSound("Sample", *Reader,range,67,wordsToSounds["llth-G4"].consonant/1000,wordsToSounds["llth-G4"].preutterance/1000,wordsToSounds["llth-G4"].overlap));
+        DBG(wordsToSounds["llth-G4"].cutoff);
+        Voice.addSound(new juce::SamplerSound("Sample", *Reader,range,67,wordsToSounds["llth-G4"].consonant/1000,wordsToSounds["llth-G4"].preutterance/1000,-1*wordsToSounds["llth-G4"].cutoff/1000,wordsToSounds["llth-G4"].offset));
 
 
 

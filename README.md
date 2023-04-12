@@ -4,11 +4,9 @@ coding for this project look the the getting started section
 
 # Getting Started
 In order to get started clone both this git repository and 
-the JUCE library which can be found at https://github.com/juce-framework/JUCE
+Our fork of the JUCE library at https://github.com/SpoonFll/JUCE_Sampling
 
-Once these repositories have been clones create build the projucer program for 
-your platform. The files for building can be found in the /path/to/JUCE/extras/projucer/builds/PLATFORM
-go to the file with your platform and use that file to build.
+make sure to clone so that file structure is SE-300-VOCALOID/Risea/JUCE
 
-after it has been built open the juce project file in Risea and build with the proper paths.
-
+once that is done run cmake -B build and cmake --build build to build the binary for your platform
+after it has built you can now run the program

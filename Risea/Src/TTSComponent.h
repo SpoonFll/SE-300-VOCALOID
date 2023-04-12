@@ -38,6 +38,7 @@ private:
     void setMidiInput(int index);
 
     SynthAudioSource audioSource;
+    
     juce::MidiKeyboardState keyboardState;
     juce::MidiKeyboardComponent keyboardComponent;
 
