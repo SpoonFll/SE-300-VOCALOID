@@ -94,7 +94,7 @@ void MainComponent::paint (juce::Graphics& g)
     g.setColour (juce::Colours::white);
     g.drawText ("Welcome to Risea!", getLocalBounds(), juce::Justification::centredTop, true);
 }
-/**
+/*
  * sets bounds for buttons and other elements after resize
  * bounds are determined by a rectangle type which can be set by points or coordinates
  * get Local Bounds gets the max size of the window use that to set new bounds
