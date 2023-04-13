@@ -73,7 +73,12 @@ private:
     juce::TextButton instModule3;
     juce::TextButton vmChoice;
 
+    juce::TextEditor tempo;
+    int tempoNumber;
+
     juce::ToggleButton notes[25][50];
+    juce::TextEditor syllable[50];
+
     int endBeat;
       
 

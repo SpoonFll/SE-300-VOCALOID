@@ -86,12 +86,17 @@ MSComponent::MSComponent() : PPButton("Play/Pause"), audioSource(keyboardState),
         for(int j=0;j<50;j++)
         {
             addAndMakeVisible(notes[i][j]);
+            addAndMakeVisible(syllable[j]);
             notes[i][j].onStateChange = [this]{
                 onToggleButtonStateChange();
             };
 
         }
     }
+    addAndMakeVisible(tempo);
+    tempo.onReturnKey =[this]{
+        tempoNumber=tempo.getText().getIntValue();
+    };
 
 }
 //==============================================================================
@@ -101,8 +106,7 @@ MSComponent::MSComponent() : PPButton("Play/Pause"), audioSource(keyboardState),
 */
 void MSComponent::paint (juce::Graphics& g)
 {
-    g.fillAll(getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));
-    g.setFont(juce::Font (16.0f));
+    g.fillAll(getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId)); g.setFont(juce::Font (16.0f));
     g.setColour(juce::Colours::white);
     g.drawText("Music Synthesis", getLocalBounds(), juce::Justification::centredTop, true);
 }
@@ -151,6 +155,8 @@ void MSComponent::resized()
 
 
     PPButton.setBounds(area);
+    area.setX(area.getX()+area.getWidth());
+    tempo.setBounds(area);
     keyboardComponent.setBounds(pArea);
 
     pVolumeSlider.setBounds(pSliderArea);
@@ -176,6 +182,11 @@ void MSComponent::resized()
             buttonArea.setBounds(buttonArea.getX()+buttonArea.getWidth(),buttonArea.getY(),buttonArea.getWidth(),buttonArea.getHeight());
         }
         buttonArea.setBounds(getWidth()/3,buttonArea.getY()+buttonArea.getHeight(),buttonArea.getWidth(),buttonArea.getHeight());
+    }
+    for(int i =0;i<50;i++)
+    {
+        syllable[i].setBounds(buttonArea);
+        buttonArea.setX(buttonArea.getX()+buttonArea.getWidth());
     }
 
 
@@ -223,7 +234,7 @@ void MSComponent::PPButtonOnClick()
             }
         }
         //jassert(true);
-        sleep(1);
+        juce::Time::waitForMillisecondCounter((60*1000)/(tempoNumber*1000));
         //DBG("BUG");
         keyboardState.allNotesOff(0);
     }
