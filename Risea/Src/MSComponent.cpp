@@ -86,6 +86,9 @@ MSComponent::MSComponent() : PPButton("Play/Pause"), audioSource(keyboardState),
         for(int j=0;j<50;j++)
         {
             addAndMakeVisible(notes[i][j]);
+            notes[i][j].onStateChange = [this]{
+                onToggleButtonStateChange();
+            };
 
         }
     }
@@ -209,6 +212,21 @@ void MSComponent::drawButtonBackground(juce::Graphics& g, juce::Button& button, 
 //================================================================
 void MSComponent::PPButtonOnClick()
 {
+    for(int j = 0; j < endBeat+1; j++) {
+        int channel =1;
+        for(int i =0;i<25;i++) {
+            if(notes[i][j].getToggleState()&&channel<16) {
+                DBG(channel);
+                keyboardState.noteOn(channel, 80- i, 1);
+                channel++;
+
+            }
+        }
+        //jassert(true);
+        sleep(1);
+        //DBG("BUG");
+        keyboardState.allNotesOff(0);
+    }
 
 }
 //================================================================
@@ -284,6 +302,16 @@ void MSComponent::setMidiInput(int index)
     deviceManager.addMidiInputDeviceCallback(newInput.identifier, audioSource.getMidiCollector());
 }
 //================================================================
+void MSComponent::onToggleButtonStateChange() {
+    for(int j = 0; j < 50; j++) {
+        for(int i =0;i<25;i++) {
+            if(notes[i][j].getToggleState()) {
+                endBeat = j;
+                break;
+            }
+        }
+    }
+}
 void MSComponent::releaseResources()
 {
 
