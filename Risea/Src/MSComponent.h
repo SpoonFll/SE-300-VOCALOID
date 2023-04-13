@@ -31,6 +31,7 @@ public:
     void releaseResources() override;
     void prepareToPlay(int, double) override;
     void getNextAudioBlock(const juce::AudioSourceChannelInfo&);
+    void onToggleButtonStateChange();
     
 private:
     juce::TextButton PPButton;
@@ -73,6 +74,7 @@ private:
     juce::TextButton vmChoice;
 
     juce::ToggleButton notes[25][50];
+    int endBeat;
       
 
     Component::SafePointer<juce::TopLevelWindow> MSWindow;
