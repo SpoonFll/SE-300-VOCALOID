@@ -90,6 +90,37 @@ public:
 
 
     }
+    int loadSound(juce::String soundIndex)
+    {
+        DBG("1");
+        auto result = wordsToSounds.find(soundIndex);
+        if(result != wordsToSounds.end()) {
+            DBG("2");
+            Reader = Manager.createReaderFor(wordsToSounds[soundIndex].soundFile);
+            juce::BigInteger range;
+            range.setRange(0, 128, true);
+            Voice.addSound(
+                    new juce::SamplerSound("Sample", *Reader, range, 67, wordsToSounds[soundIndex].consonant / 1000,
+                                           wordsToSounds[soundIndex].preutterance / 1000,
+                                           -1 * wordsToSounds[soundIndex].cutoff / 1000,
+                                           wordsToSounds[soundIndex].offset));
+            return 0;
+        }
+        else
+        {
+            DBG("word not found");
+            return 1;
+        }
+    }
+    std::vector<juce::String> getSounds()
+    {
+        std::vector<juce::String> keys;
+        for(auto keypair:wordsToSounds)
+        {
+            keys.push_back(keypair.first);
+        }
+        return keys;
+    }
     void releaseResources() override{}
     /**
      * processes the sampler and midi events to convert to audio

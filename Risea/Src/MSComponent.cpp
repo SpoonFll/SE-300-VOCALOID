@@ -90,6 +90,11 @@ MSComponent::MSComponent() : PPButton("Play/Pause"), audioSource(keyboardState),
             notes[i][j].onStateChange = [this]{
                 onToggleButtonStateChange();
             };
+            syllable[j].onReturnKey=[this,j]{
+                int error = audioSource.loadSound(syllable[j].getText());
+                if(error)
+                    syllable[j].clear();
+            };
 
         }
     }
@@ -109,6 +114,10 @@ void MSComponent::paint (juce::Graphics& g)
     g.fillAll(getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId)); g.setFont(juce::Font (16.0f));
     g.setColour(juce::Colours::white);
     g.drawText("Music Synthesis", getLocalBounds(), juce::Justification::centredTop, true);
+    //for(auto sound:audioSource.getSounds())
+    //{
+    //    g.drawText(sound, getLocalBounds(), juce::Justification::centredTop, true);
+    //}
 }
 //================================================================
 void MSComponent::resized()
@@ -225,17 +234,18 @@ void MSComponent::PPButtonOnClick()
 {
     for(int j = 0; j < endBeat+1; j++) {
         int channel =1;
+        audioSource.loadSound(syllable[j].getText());
+        DBG(syllable[j].getText());
         for(int i =0;i<25;i++) {
             if(notes[i][j].getToggleState()&&channel<16) {
                 DBG(channel);
                 keyboardState.noteOn(channel, 80- i, 1);
                 channel++;
-
             }
         }
         //jassert(true);
-        juce::Time::waitForMillisecondCounter((60*1000)/(tempoNumber*1000));
-        //DBG("BUG");
+        DBG((60*1000)/tempoNumber);
+        std::this_thread::sleep_for(std::chrono::milliseconds((60*1000)/tempoNumber));
         keyboardState.allNotesOff(0);
     }
 

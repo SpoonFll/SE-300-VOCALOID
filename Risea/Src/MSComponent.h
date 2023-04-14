@@ -15,6 +15,8 @@
 #include "juce_audio_processors/juce_audio_processors.h"
 #include "juce_audio_utils/juce_audio_utils.h"
 #include "WavPlayer.h"
+#include <chrono>
+#include <thread>
 //================================================================
 class MSComponent : public juce::AudioAppComponent, 
 private juce::Timer
