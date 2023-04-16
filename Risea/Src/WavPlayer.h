@@ -4,6 +4,7 @@
 #include "juce_audio_devices/juce_audio_devices.h"
 #include "juce_audio_processors/juce_audio_processors.h"
 #include "juce_audio_utils/juce_audio_utils.h"
+#include "Synthesizer.h"
 /**
  * settings data type for the time settings for individual samples
  */
@@ -25,10 +26,16 @@ public:
      */
     SynthAudioSource(juce::MidiKeyboardState &keyState): keyboardState(keyState)
     {
+
         Manager.registerBasicFormats();
-        for(int i =0;i<4;i++)
+        for(int i =0;i<4;i++) {
             Voice.addVoice(new juce::SamplerVoice());
-        //loadFile();
+            Voice.addVoice(new SineWaveVoice());
+        }
+        auto sound = new SineWaveVoice();
+        Voice.addSound(new juce::SineWaveSound());
+            //loadFile();
+
     }
     /**
      * prepares samples for play making sure the sample reate is correct
@@ -132,6 +139,7 @@ public:
 
         juce::MidiBuffer incomingMidi;
         keyboardState.processNextMidiBuffer(incomingMidi,bufferToFill.startSample,bufferToFill.numSamples,true);
+
         Voice.renderNextBlock(*bufferToFill.buffer,incomingMidi,bufferToFill.startSample,bufferToFill.numSamples);
     }
     /**

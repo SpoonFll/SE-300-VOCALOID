@@ -99,6 +99,8 @@ MSComponent::MSComponent() : PPButton("Play/Pause"), audioSource(keyboardState),
         }
     }
     addAndMakeVisible(tempo);
+    tempo.setText("80");
+    tempoNumber=80;
     tempo.onReturnKey =[this]{
         tempoNumber=tempo.getText().getIntValue();
     };
@@ -232,15 +234,14 @@ void MSComponent::drawButtonBackground(juce::Graphics& g, juce::Button& button, 
 //================================================================
 void MSComponent::PPButtonOnClick()
 {
+    int channel =1;
     for(int j = 0; j < endBeat+1; j++) {
-        int channel =1;
         audioSource.loadSound(syllable[j].getText());
         DBG(syllable[j].getText());
         for(int i =0;i<25;i++) {
             if(notes[i][j].getToggleState()&&channel<16) {
                 DBG(channel);
                 keyboardState.noteOn(channel, 80- i, 1);
-                channel++;
             }
         }
         //jassert(true);
