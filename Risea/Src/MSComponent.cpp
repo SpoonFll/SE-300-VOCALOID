@@ -81,23 +81,26 @@ MSComponent::MSComponent() : PPButton("Play/Pause"), audioSource(keyboardState),
     addAndMakeVisible(inst2Choice);
     addAndMakeVisible(inst3Choice);
 //==============================================================================
-    for(int i =0;i<25;i++)
-    {
-        for(int j=0;j<50;j++)
-        {
-            addAndMakeVisible(notes[i][j]);
-            addAndMakeVisible(syllable[j]);
-            notes[i][j].onStateChange = [this]{
-                onToggleButtonStateChange();
-            };
-            syllable[j].onReturnKey=[this,j]{
-                int error = audioSource.loadSound(syllable[j].getText());
-                if(error)
-                    syllable[j].clear();
-            };
-
+    for(int k =0;k<3;k++) {
+        for (int i = 0; i < 25; i++) {
+            for (int j = 0; j < 50; j++) {
+                addAndMakeVisible(notes[k][i][j]);
+                notes[k][i][j].onStateChange = [this] {
+                    onToggleButtonStateChange();
+                };
+            }
         }
     }
+    for(int i =0;i<50;i++)
+    {
+        addAndMakeVisible(syllable[i]);
+        syllable[i].onReturnKey = [this, i] {
+            int error = audioSource.loadSound(syllable[i].getText());
+            if (error)
+                syllable[i].clear();
+        };
+    }
+
     addAndMakeVisible(tempo);
     tempo.setText("80");
     tempoNumber=80;
@@ -184,16 +187,21 @@ void MSComponent::resized()
     inst3Choice.setBounds(7, 322, (getWidth()/6) - 4, getHeight()/16);
 
    auto buttonArea = getLocalBounds();
-   buttonArea.setBounds(getWidth()/3,440,30,30);
+   for(int k =0;k<3;k++)
+   {
+       buttonArea.setBounds(getWidth()/3,440,30,30);
     for(int i =0;i<25;i++)
     {
         for(int j=0;j<50;j++)
         {
-            notes[i][j].setBounds(buttonArea);
+            notes[k][i][j].setBounds(buttonArea);
             buttonArea.setBounds(buttonArea.getX()+buttonArea.getWidth(),buttonArea.getY(),buttonArea.getWidth(),buttonArea.getHeight());
+            if(k>0)
+                notes[k][i][j].setVisible(false);
         }
         buttonArea.setBounds(getWidth()/3,buttonArea.getY()+buttonArea.getHeight(),buttonArea.getWidth(),buttonArea.getHeight());
     }
+   }
     for(int i =0;i<50;i++)
     {
         syllable[i].setBounds(buttonArea);
@@ -234,15 +242,19 @@ void MSComponent::drawButtonBackground(juce::Graphics& g, juce::Button& button, 
 //================================================================
 void MSComponent::PPButtonOnClick()
 {
-    int channel =1;
     for(int j = 0; j < endBeat+1; j++) {
+        int channel =1;
         audioSource.loadSound(syllable[j].getText());
         DBG(syllable[j].getText());
-        for(int i =0;i<25;i++) {
-            if(notes[i][j].getToggleState()&&channel<16) {
+        for(int k = 0;k<3;k++)
+        {
+            for(int i =0;i<25;i++) {
+                if(notes[k][i][j].getToggleState()&&channel<16) {
                 DBG(channel);
                 keyboardState.noteOn(channel, 80- i, 1);
+                }
             }
+            channel++;
         }
         //jassert(true);
         DBG((60*1000)/tempoNumber);
@@ -271,8 +283,10 @@ void MSComponent::inst1ChoiceChanged()
     switch (inst1Choice.getSelectedId())
     {
         case 1:
+            inst1Focus =1;
             break;
         case 2:
+            inst1Focus =2;
             break;
         case 3:
              break;
@@ -285,8 +299,10 @@ void MSComponent::inst2ChoiceChanged()
     switch (inst2Choice.getSelectedId())
     {
         case 1:
+            inst2Focus =1;
             break;
         case 2:
+            inst2Focus =2;
             break;
         case 3:
             break;
@@ -299,8 +315,10 @@ void MSComponent::inst3ChoiceChanged()
     switch (inst3Choice.getSelectedId())
     {
         case 1:
+            inst3Focus =1;
             break;
         case 2:
+            inst3Focus =2;
             break;
         case 3:
             break;
@@ -326,10 +344,12 @@ void MSComponent::setMidiInput(int index)
 //================================================================
 void MSComponent::onToggleButtonStateChange() {
     for(int j = 0; j < 50; j++) {
-        for(int i =0;i<25;i++) {
-            if(notes[i][j].getToggleState()) {
-                endBeat = j;
-                break;
+        for(int k =0;k<3;k++) {
+            for (int i = 0; i < 25; i++) {
+                if (notes[k][i][j].getToggleState()) {
+                    endBeat = j;
+                    break;
+                }
             }
         }
     }
