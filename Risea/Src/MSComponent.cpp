@@ -274,7 +274,7 @@ void MSComponent::drawButtonBackground(juce::Graphics& g, juce::Button& button, 
     g.setColour(backgroundColour);
     g.fillRect(buttonArea);
 
-}    
+}
 //================================================================
 void MSComponent::PPButtonOnClick()
 {
