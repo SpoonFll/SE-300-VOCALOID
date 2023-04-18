@@ -97,9 +97,17 @@ MSComponent::MSComponent() : PPButton("Play/Pause"), audioSource(keyboardState),
         for(int j=0;j<50;j++)
         {
             addAndMakeVisible(notes[i][j]);
+            addAndMakeVisible(syllable[j]);
+            notes[i][j].onStateChange = [this]{
+                onToggleButtonStateChange();
+            };
 
         }
     }
+    addAndMakeVisible(tempo);
+    tempo.onReturnKey =[this]{
+        tempoNumber=tempo.getText().getIntValue();
+    };
 
 }
 //==============================================================================
@@ -109,8 +117,7 @@ MSComponent::MSComponent() : PPButton("Play/Pause"), audioSource(keyboardState),
 */
 void MSComponent::paint (juce::Graphics& g)
 {
-    g.fillAll(getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));
-    g.setFont(juce::Font (16.0f));
+    g.fillAll(getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId)); g.setFont(juce::Font (16.0f));
     g.setColour(juce::Colours::white);
     g.drawText("Music Synthesis", getLocalBounds(), juce::Justification::centredTop, true);
 }
@@ -173,6 +180,8 @@ void MSComponent::resized()
 
 
     PPButton.setBounds(area);
+    area.setX(area.getX()+area.getWidth());
+    tempo.setBounds(area);
     keyboardComponent.setBounds(pArea);
 
     pVolumeSlider.setBounds(pSliderArea);
@@ -209,6 +218,11 @@ void MSComponent::resized()
         }
         buttonArea.setBounds(getWidth()/3,buttonArea.getY()+buttonArea.getHeight(),buttonArea.getWidth(),buttonArea.getHeight());
     }
+    for(int i =0;i<50;i++)
+    {
+        syllable[i].setBounds(buttonArea);
+        buttonArea.setX(buttonArea.getX()+buttonArea.getWidth());
+    }
 
 
 }
@@ -244,6 +258,21 @@ void MSComponent::drawButtonBackground(juce::Graphics& g, juce::Button& button, 
 //================================================================
 void MSComponent::PPButtonOnClick()
 {
+    for(int j = 0; j < endBeat+1; j++) {
+        int channel =1;
+        for(int i =0;i<25;i++) {
+            if(notes[i][j].getToggleState()&&channel<16) {
+                DBG(channel);
+                keyboardState.noteOn(channel, 80- i, 1);
+                channel++;
+
+            }
+        }
+        //jassert(true);
+        juce::Time::waitForMillisecondCounter((60*1000)/(tempoNumber*1000));
+        //DBG("BUG");
+        keyboardState.allNotesOff(0);
+    }
 
 }
 //================================================================
@@ -319,6 +348,16 @@ void MSComponent::setMidiInput(int index)
     deviceManager.addMidiInputDeviceCallback(newInput.identifier, audioSource.getMidiCollector());
 }
 //================================================================
+void MSComponent::onToggleButtonStateChange() {
+    for(int j = 0; j < 50; j++) {
+        for(int i =0;i<25;i++) {
+            if(notes[i][j].getToggleState()) {
+                endBeat = j;
+                break;
+            }
+        }
+    }
+}
 void MSComponent::releaseResources()
 {
 
