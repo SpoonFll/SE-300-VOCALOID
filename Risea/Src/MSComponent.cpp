@@ -9,9 +9,9 @@ MSComponent::MSComponent() : PPButton("Play/Pause"), audioSource(keyboardState),
 //==============================================================================
     //setting up dropdown for instruments
     insMenu.setTextWhenNothingSelected("Choices");
-    insMenu.addItem("Instrument 1", 1);
-    insMenu.addItem("Instrument 2", 2);
-    insMenu.addItem("Instrument 3", 3);
+    insMenu.addItem("Drums", 1);
+    insMenu.addItem("Guitar", 2);
+    insMenu.addItem("Synth", 3);
 
     insMenu.onChange = [this]
     {
@@ -80,6 +80,16 @@ MSComponent::MSComponent() : PPButton("Play/Pause"), audioSource(keyboardState),
     addAndMakeVisible(inst1Choice);
     addAndMakeVisible(inst2Choice);
     addAndMakeVisible(inst3Choice);
+        addAndMakeVisible(vmSlider);
+    addAndMakeVisible(inst1Slider);
+    addAndMakeVisible(inst2Slider);
+    addAndMakeVisible(inst3Slider);
+
+    addAndMakeVisible(vNote);
+    addAndMakeVisible(i1Note);
+    addAndMakeVisible(i2Note);
+    addAndMakeVisible(i3Note);
+
 //==============================================================================
     for(int k =0;k<3;k++) {
         for (int i = 0; i < 25; i++) {
@@ -89,6 +99,7 @@ MSComponent::MSComponent() : PPButton("Play/Pause"), audioSource(keyboardState),
                     onToggleButtonStateChange();
                 };
             }
+
         }
     }
     for(int i =0;i<50;i++)
@@ -153,6 +164,11 @@ void MSComponent::resized()
     auto iModDDArea2 = getLocalBounds();
     auto iModDDArea3 = getLocalBounds();
 
+    auto vNoteArea = getLocalBounds();
+    auto i1NoteArea = getLocalBounds();
+    auto i2NoteArea = getLocalBounds();
+    auto i3NoteArea = getLocalBounds();
+
 
     area.setBounds(5, 10, 100, 40);
     newArea.setBounds(1100, 10, 100, 40);
@@ -166,6 +182,15 @@ void MSComponent::resized()
     iModArea2.setBounds(5, 230, getWidth()/6, getHeight()/8);
     iModArea3.setBounds(5, 320, getWidth()/6, getHeight()/8);
 
+    vNoteArea.setBounds((5 + (getWidth()/6)), 50, getWidth()/1.5, getHeight()/8);
+    i1NoteArea.setBounds((5 + (getWidth()/6)), 140, getWidth()/1.5, getHeight()/8);
+    i2NoteArea.setBounds((5 + (getWidth()/6)), 230, getWidth()/1.5, getHeight()/8);
+    i3NoteArea.setBounds((5 + (getWidth()/6)), 320, getWidth()/1.5, getHeight()/8);
+
+    vmSliderArea.setBounds(9, 82, (getWidth()/6) - 4, getHeight()/16);
+    inst1SliderArea.setBounds(9, 176, (getWidth()/6) - 4, getHeight()/16);
+    inst2SliderArea.setBounds(9, 266, (getWidth()/6) - 4, getHeight()/16);
+    inst3SliderArea.setBounds(9, 356, (getWidth()/6) - 4, getHeight()/16);
 
 
     PPButton.setBounds(area);
@@ -181,18 +206,30 @@ void MSComponent::resized()
     instModule2.setBounds(iModArea2);
     instModule3.setBounds(iModArea3);
 
+    vNote.setBounds(vNoteArea);
+    i1Note.setBounds(i1NoteArea);
+    i2Note.setBounds(i2NoteArea);
+    i3Note.setBounds(i3NoteArea);
+
     insMenu.setBounds(newArea);
     inst1Choice.setBounds(7, 142, (getWidth()/6) - 4, getHeight()/16);
     inst2Choice.setBounds(7, 232, (getWidth()/6) - 4, getHeight()/16);
     inst3Choice.setBounds(7, 322, (getWidth()/6) - 4, getHeight()/16);
 
+    vmSlider.setBounds(vmSliderArea);
+    inst1Slider.setBounds(inst1SliderArea);
+    inst2Slider.setBounds(inst2SliderArea);
+    inst3Slider.setBounds(inst3SliderArea);
+
    auto buttonArea = getLocalBounds();
+
    for(int k =0;k<3;k++)
    {
        buttonArea.setBounds(getWidth()/3,440,30,30);
     for(int i =0;i<25;i++)
+
     {
-        for(int j=0;j<50;j++)
+        for(int j=0;j<40;j++)
         {
             notes[k][i][j].setBounds(buttonArea);
             buttonArea.setBounds(buttonArea.getX()+buttonArea.getWidth(),buttonArea.getY(),buttonArea.getWidth(),buttonArea.getHeight());
