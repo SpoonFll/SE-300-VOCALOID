@@ -75,7 +75,6 @@ private:
     juce::TextButton instModule3;
     juce::TextButton vmChoice;
 
-
     juce::TextButton vNote;
     juce::TextButton i1Note;
     juce::TextButton i2Note;

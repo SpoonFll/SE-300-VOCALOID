@@ -355,6 +355,7 @@ void MSComponent::inst1ChoiceChanged()
             inst1Focus =2;
             break;
         case 3:
+            inst1Focus =3;
              break;
         default: break;
     }
@@ -371,6 +372,7 @@ void MSComponent::inst2ChoiceChanged()
             inst2Focus =2;
             break;
         case 3:
+            inst2Focus =3;
             break;
         default: break;
     }
@@ -387,6 +389,7 @@ void MSComponent::inst3ChoiceChanged()
             inst3Focus =2;
             break;
         case 3:
+            inst3Focus =3;
             break;
         default: break;
     }
