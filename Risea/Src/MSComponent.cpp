@@ -222,12 +222,7 @@ void MSComponent::resized()
     inst3Slider.setBounds(inst3SliderArea);
 
    auto buttonArea = getLocalBounds();
-<<<<<<< HEAD
-
-   for(int k =0;k<3;k++)
-=======
    for(int k =0;k<4;k++)
->>>>>>> 1dacaffd (added guitar)
    {
        buttonArea.setBounds(getWidth()/3,440,30,30);
     for(int i =0;i<25;i++)

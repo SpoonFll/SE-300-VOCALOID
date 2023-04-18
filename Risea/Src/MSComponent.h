@@ -83,13 +83,9 @@ private:
     juce::TextEditor tempo;
     int tempoNumber;
 
-<<<<<<< HEAD
 
-    juce::ToggleButton notes[3][25][50];
 
-=======
     juce::ToggleButton notes[4][25][50];
->>>>>>> 1dacaffd (added guitar)
     juce::TextEditor syllable[50];
 
     int endBeat;
