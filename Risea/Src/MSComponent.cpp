@@ -274,7 +274,37 @@ void MSComponent::drawButtonBackground(juce::Graphics& g, juce::Button& button, 
     g.setColour(backgroundColour);
     g.fillRect(buttonArea);
 
-}    
+}  
+
+//================================================================
+/**
+* for drawing buttons and creating style
+*    @param g
+*    @param button
+*    @param backgroundColour
+*    @param isButtonDown
+*/
+void MSComponent::drawOnButtonBackground(juce::Graphics& g, juce::Button& button, const juce::Colour& backgroundColour, bool isButtonDown)
+{
+    auto buttonArea = button.getLocalBounds();
+    auto edge = 4;
+
+    buttonArea.removeFromLeft(edge);
+    buttonArea.removeFromTop(edge);
+    
+    //creating the shadows
+    g.setColour (juce::Colours::lightgreen.withAlpha (0.5f));
+    g.fillRect(buttonArea);
+
+    //shadow offsets
+    auto offset = isButtonDown ? -edge /2: -edge;
+    buttonArea.translate (offset, offset);
+
+    //setting button colour
+    g.setColour(backgroundColour);
+    g.fillRect(buttonArea);
+}
+
 //================================================================
 void MSComponent::PPButtonOnClick()
 {
