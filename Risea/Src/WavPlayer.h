@@ -4,6 +4,7 @@
 #include "juce_audio_devices/juce_audio_devices.h"
 #include "juce_audio_processors/juce_audio_processors.h"
 #include "juce_audio_utils/juce_audio_utils.h"
+#include "Synthesizer.h"
 /**
  * settings data type for the time settings for individual samples
  */
@@ -25,10 +26,16 @@ public:
      */
     SynthAudioSource(juce::MidiKeyboardState &keyState): keyboardState(keyState)
     {
+
         Manager.registerBasicFormats();
-        for(int i =0;i<4;i++)
+        for(int i =0;i<4;i++) {
             Voice.addVoice(new juce::SamplerVoice());
-        //loadFile();
+            Voice.addVoice(new SineWaveVoice());
+        }
+        auto sound = new SineWaveVoice();
+        Voice.addSound(new juce::SineWaveSound());
+            //loadFile();
+
     }
     /**
      * prepares samples for play making sure the sample reate is correct
@@ -86,9 +93,63 @@ public:
         range.setRange(0,128,true);
         DBG(wordsToSounds["llth-G4"].cutoff);
         Voice.addSound(new juce::SamplerSound("Sample", *Reader,range,67,wordsToSounds["llth-G4"].consonant/1000,wordsToSounds["llth-G4"].preutterance/1000,-1*wordsToSounds["llth-G4"].cutoff/1000,wordsToSounds["llth-G4"].offset));
+        juce::File drums = file.getParentDirectory().getParentDirectory().getChildFile("Instruments");
 
-
-
+        juce::File hat = drums.getChildFile("MC_Hat (10).wav");
+        juce::File kick = drums.getChildFile("MC_kick (12).wav");
+        juce::File perc = drums.getChildFile("MC_Perc (7).wav");
+        juce::File snare = drums.getChildFile("MC_Snare (15).wav");
+        HatReader = Manager.createReaderFor(hat);
+        KickReader = Manager.createReaderFor(kick);
+        PercReader = Manager.createReaderFor(perc);
+        SnareReader = Manager.createReaderFor(snare);
+        hatSound = new juce::SamplerSound("hat",*HatReader,range,55,0,0,0.71,0);
+        hatSound->setChannel(3);
+        hatSound->setApplyNote(55);
+        Voice.addSound(hatSound);
+        kickSound = new juce::SamplerSound("kick",*KickReader,range,56,0,0,0.50,0);
+        kickSound->setChannel(3);
+        kickSound->setApplyNote(56);
+        Voice.addSound(kickSound);
+        percSound = new juce::SamplerSound("perc",*PercReader,range,57,0,0,0.71,0);
+        percSound->setChannel(3);
+        percSound->setApplyNote(57);
+        Voice.addSound(percSound);
+        snareSound = new juce::SamplerSound("snare",*SnareReader,range,58,0,0,0.71,0);
+        snareSound->setChannel(3);
+        snareSound->setApplyNote(58);
+        Voice.addSound(snareSound);
+    }
+    int loadSound(juce::String soundIndex)
+    {
+        DBG("1");
+        auto result = wordsToSounds.find(soundIndex);
+        if(result != wordsToSounds.end()) {
+            DBG("2");
+            Reader = Manager.createReaderFor(wordsToSounds[soundIndex].soundFile);
+            juce::BigInteger range;
+            range.setRange(0, 128, true);
+            Voice.addSound(
+                    new juce::SamplerSound("Sample", *Reader, range, 67, wordsToSounds[soundIndex].consonant / 1000,
+                                           wordsToSounds[soundIndex].preutterance / 1000,
+                                           -1 * wordsToSounds[soundIndex].cutoff / 1000,
+                                           wordsToSounds[soundIndex].offset));
+            return 0;
+        }
+        else
+        {
+            DBG("word not found");
+            return 1;
+        }
+    }
+    std::vector<juce::String> getSounds()
+    {
+        std::vector<juce::String> keys;
+        for(auto keypair:wordsToSounds)
+        {
+            keys.push_back(keypair.first);
+        }
+        return keys;
     }
     void releaseResources() override{}
     /**
@@ -101,6 +162,7 @@ public:
 
         juce::MidiBuffer incomingMidi;
         keyboardState.processNextMidiBuffer(incomingMidi,bufferToFill.startSample,bufferToFill.numSamples,true);
+
         Voice.renderNextBlock(*bufferToFill.buffer,incomingMidi,bufferToFill.startSample,bufferToFill.numSamples);
     }
     /**
@@ -118,6 +180,14 @@ private:
     juce::Synthesiser Voice;
     juce::AudioFormatManager Manager;
     juce::AudioFormatReader* Reader{nullptr};
+    juce::AudioFormatReader* HatReader{nullptr};
+    juce::SamplerSound* hatSound;
+    juce::AudioFormatReader* KickReader{nullptr};
+    juce::SamplerSound* kickSound;
+    juce::AudioFormatReader* PercReader{nullptr};
+    juce::SamplerSound* percSound;
+    juce::AudioFormatReader* SnareReader{nullptr};
+    juce::SamplerSound* snareSound;
     juce::MidiMessageCollector midiCollector;
 
 };

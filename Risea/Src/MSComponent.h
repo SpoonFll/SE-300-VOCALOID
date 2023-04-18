@@ -15,6 +15,8 @@
 #include "juce_audio_processors/juce_audio_processors.h"
 #include "juce_audio_utils/juce_audio_utils.h"
 #include "WavPlayer.h"
+#include <chrono>
+#include <thread>
 //================================================================
 class MSComponent : public juce::AudioAppComponent, 
 private juce::Timer
@@ -61,10 +63,12 @@ private:
     juce::ComboBox inst2Menu;
     juce::ComboBox inst3Menu;
     juce::ComboBox inst1Choice;
+    int inst1Focus=0;
     juce::ComboBox inst2Choice;
+    int inst2Focus=0;
     juce::ComboBox inst3Choice;
-
-    juce::TextButton voiceModule; 
+    int inst3Focus=0;
+    juce::TextButton voiceModule;
     juce::TextButton instModule1;
     juce::TextButton instModule2;
     juce::TextButton instModule3;
@@ -80,10 +84,12 @@ private:
     int tempoNumber;
 
 
-    juce::ToggleButton notes[25][50];
+    juce::ToggleButton notes[3][25][50];
+
     juce::TextEditor syllable[50];
 
     int endBeat;
+    int focusBoard=0;
       
 
     Component::SafePointer<juce::TopLevelWindow> MSWindow;

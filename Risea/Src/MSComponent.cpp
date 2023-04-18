@@ -80,8 +80,7 @@ MSComponent::MSComponent() : PPButton("Play/Pause"), audioSource(keyboardState),
     addAndMakeVisible(inst1Choice);
     addAndMakeVisible(inst2Choice);
     addAndMakeVisible(inst3Choice);
-
-    addAndMakeVisible(vmSlider);
+        addAndMakeVisible(vmSlider);
     addAndMakeVisible(inst1Slider);
     addAndMakeVisible(inst2Slider);
     addAndMakeVisible(inst3Slider);
@@ -91,20 +90,31 @@ MSComponent::MSComponent() : PPButton("Play/Pause"), audioSource(keyboardState),
     addAndMakeVisible(i2Note);
     addAndMakeVisible(i3Note);
 
-//===============================================================================
-    for(int i =0;i<25;i++)
-    {
-        for(int j=0;j<50;j++)
-        {
-            addAndMakeVisible(notes[i][j]);
-            addAndMakeVisible(syllable[j]);
-            notes[i][j].onStateChange = [this]{
-                onToggleButtonStateChange();
-            };
+//==============================================================================
+    for(int k =0;k<3;k++) {
+        for (int i = 0; i < 25; i++) {
+            for (int j = 0; j < 50; j++) {
+                addAndMakeVisible(notes[k][i][j]);
+                notes[k][i][j].onStateChange = [this] {
+                    onToggleButtonStateChange();
+                };
+            }
 
         }
     }
+    for(int i =0;i<50;i++)
+    {
+        addAndMakeVisible(syllable[i]);
+        syllable[i].onReturnKey = [this, i] {
+            int error = audioSource.loadSound(syllable[i].getText());
+            if (error)
+                syllable[i].clear();
+        };
+    }
+
     addAndMakeVisible(tempo);
+    tempo.setText("80");
+    tempoNumber=80;
     tempo.onReturnKey =[this]{
         tempoNumber=tempo.getText().getIntValue();
     };
@@ -120,6 +130,10 @@ void MSComponent::paint (juce::Graphics& g)
     g.fillAll(getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId)); g.setFont(juce::Font (16.0f));
     g.setColour(juce::Colours::white);
     g.drawText("Music Synthesis", getLocalBounds(), juce::Justification::centredTop, true);
+    //for(auto sound:audioSource.getSounds())
+    //{
+    //    g.drawText(sound, getLocalBounds(), juce::Justification::centredTop, true);
+    //}
 }
 //================================================================
 void MSComponent::resized()
@@ -208,16 +222,23 @@ void MSComponent::resized()
     inst3Slider.setBounds(inst3SliderArea);
 
    auto buttonArea = getLocalBounds();
-   buttonArea.setBounds(getWidth()/3,455, 20, keyboardComponent.getKeyWidth());
-    for(int i =0;i<20;i++)
+
+   for(int k =0;k<3;k++)
+   {
+       buttonArea.setBounds(getWidth()/3,440,30,30);
+    for(int i =0;i<25;i++)
+
     {
         for(int j=0;j<40;j++)
         {
-            notes[i][j].setBounds(buttonArea);
+            notes[k][i][j].setBounds(buttonArea);
             buttonArea.setBounds(buttonArea.getX()+buttonArea.getWidth(),buttonArea.getY(),buttonArea.getWidth(),buttonArea.getHeight());
+            if(k>0)
+                notes[k][i][j].setVisible(false);
         }
         buttonArea.setBounds(getWidth()/3,buttonArea.getY()+buttonArea.getHeight(),buttonArea.getWidth(),buttonArea.getHeight());
     }
+   }
     for(int i =0;i<50;i++)
     {
         syllable[i].setBounds(buttonArea);
@@ -260,17 +281,21 @@ void MSComponent::PPButtonOnClick()
 {
     for(int j = 0; j < endBeat+1; j++) {
         int channel =1;
-        for(int i =0;i<25;i++) {
-            if(notes[i][j].getToggleState()&&channel<16) {
+        audioSource.loadSound(syllable[j].getText());
+        DBG(syllable[j].getText());
+        for(int k = 0;k<3;k++)
+        {
+            for(int i =0;i<25;i++) {
+                if(notes[k][i][j].getToggleState()&&channel<16) {
                 DBG(channel);
                 keyboardState.noteOn(channel, 80- i, 1);
-                channel++;
-
+                }
             }
+            channel++;
         }
         //jassert(true);
-        juce::Time::waitForMillisecondCounter((60*1000)/(tempoNumber*1000));
-        //DBG("BUG");
+        DBG((60*1000)/tempoNumber);
+        std::this_thread::sleep_for(std::chrono::milliseconds((60*1000)/tempoNumber));
         keyboardState.allNotesOff(0);
     }
 
@@ -295,8 +320,10 @@ void MSComponent::inst1ChoiceChanged()
     switch (inst1Choice.getSelectedId())
     {
         case 1:
+            inst1Focus =1;
             break;
         case 2:
+            inst1Focus =2;
             break;
         case 3:
              break;
@@ -309,8 +336,10 @@ void MSComponent::inst2ChoiceChanged()
     switch (inst2Choice.getSelectedId())
     {
         case 1:
+            inst2Focus =1;
             break;
         case 2:
+            inst2Focus =2;
             break;
         case 3:
             break;
@@ -323,8 +352,10 @@ void MSComponent::inst3ChoiceChanged()
     switch (inst3Choice.getSelectedId())
     {
         case 1:
+            inst3Focus =1;
             break;
         case 2:
+            inst3Focus =2;
             break;
         case 3:
             break;
@@ -350,10 +381,12 @@ void MSComponent::setMidiInput(int index)
 //================================================================
 void MSComponent::onToggleButtonStateChange() {
     for(int j = 0; j < 50; j++) {
-        for(int i =0;i<25;i++) {
-            if(notes[i][j].getToggleState()) {
-                endBeat = j;
-                break;
+        for(int k =0;k<3;k++) {
+            for (int i = 0; i < 25; i++) {
+                if (notes[k][i][j].getToggleState()) {
+                    endBeat = j;
+                    break;
+                }
             }
         }
     }
