@@ -51,13 +51,10 @@ private:
     juce::Slider pVolumeSlider;
     juce::Slider mVolumeSlider;
     juce::Slider vmSlider;
-        juce::Slider vmVolumeSlider;
-    juce::Slider inst1Slider;
-        juce::Slider inst1VolumeSlider;
+    juce::Slider inst1Slider; 
     juce::Slider inst2Slider;
-        juce::Slider inst2VolumeSlider;
     juce::Slider inst3Slider;
-        juce::Slider inst3VolumeSlider;
+
 
     juce::ComboBox vmMenu;
     juce::ComboBox inst1Menu;
@@ -73,8 +70,15 @@ private:
     juce::TextButton instModule3;
     juce::TextButton vmChoice;
 
+
+    juce::TextButton vNote;
+    juce::TextButton i1Note;
+    juce::TextButton i2Note;
+    juce::TextButton i3Note;
+
     juce::TextEditor tempo;
     int tempoNumber;
+
 
     juce::ToggleButton notes[25][50];
     juce::TextEditor syllable[50];
