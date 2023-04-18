@@ -91,7 +91,7 @@ MSComponent::MSComponent() : PPButton("Play/Pause"), audioSource(keyboardState),
     addAndMakeVisible(i3Note);
 
 //==============================================================================
-    for(int k =0;k<3;k++) {
+    for(int k =0;k<4;k++) {
         for (int i = 0; i < 25; i++) {
             for (int j = 0; j < 50; j++) {
                 addAndMakeVisible(notes[k][i][j]);
@@ -222,8 +222,7 @@ void MSComponent::resized()
     inst3Slider.setBounds(inst3SliderArea);
 
    auto buttonArea = getLocalBounds();
-
-   for(int k =0;k<3;k++)
+   for(int k =0;k<4;k++)
    {
        buttonArea.setBounds(getWidth()/3,440,30,30);
     for(int i =0;i<25;i++)
@@ -283,7 +282,7 @@ void MSComponent::PPButtonOnClick()
         int channel =1;
         audioSource.loadSound(syllable[j].getText());
         DBG(syllable[j].getText());
-        for(int k = 0;k<3;k++)
+        for(int k = 0;k<4;k++)
         {
             for(int i =0;i<25;i++) {
                 if(notes[k][i][j].getToggleState()&&channel<16) {
@@ -381,7 +380,7 @@ void MSComponent::setMidiInput(int index)
 //================================================================
 void MSComponent::onToggleButtonStateChange() {
     for(int j = 0; j < 50; j++) {
-        for(int k =0;k<3;k++) {
+        for(int k =0;k<4;k++) {
             for (int i = 0; i < 25; i++) {
                 if (notes[k][i][j].getToggleState()) {
                     endBeat = j;

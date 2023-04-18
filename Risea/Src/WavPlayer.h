@@ -99,10 +99,12 @@ public:
         juce::File kick = drums.getChildFile("MC_kick (12).wav");
         juce::File perc = drums.getChildFile("MC_Perc (7).wav");
         juce::File snare = drums.getChildFile("MC_Snare (15).wav");
+        juce::File guitar = drums.getChildFile("guitar-single-falling-note.wav");
         HatReader = Manager.createReaderFor(hat);
         KickReader = Manager.createReaderFor(kick);
         PercReader = Manager.createReaderFor(perc);
         SnareReader = Manager.createReaderFor(snare);
+        GuitarReader = Manager.createReaderFor(guitar);
         hatSound = new juce::SamplerSound("hat",*HatReader,range,55,0,0,0.71,0);
         hatSound->setChannel(3);
         hatSound->setApplyNote(55);
@@ -119,6 +121,9 @@ public:
         snareSound->setChannel(3);
         snareSound->setApplyNote(58);
         Voice.addSound(snareSound);
+        guitarSound = new juce::SamplerSound("guitar",*GuitarReader,range,64,0,0,0.71,0);
+        guitarSound->setChannel(4);
+        Voice.addSound(guitarSound);
     }
     int loadSound(juce::String soundIndex)
     {
@@ -189,6 +194,8 @@ private:
     juce::AudioFormatReader* SnareReader{nullptr};
     juce::SamplerSound* snareSound;
     juce::MidiMessageCollector midiCollector;
+    juce::AudioFormatReader* GuitarReader{nullptr};
+    juce::SamplerSound* guitarSound;
 
 };
 /**

@@ -84,8 +84,8 @@ private:
     int tempoNumber;
 
 
-    juce::ToggleButton notes[3][25][50];
 
+    juce::ToggleButton notes[4][25][50];
     juce::TextEditor syllable[50];
 
     int endBeat;
