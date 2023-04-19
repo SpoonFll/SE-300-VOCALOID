@@ -169,6 +169,8 @@ void MSComponent::resized()
     auto i2NoteArea = getLocalBounds();
     auto i3NoteArea = getLocalBounds();
 
+    auto tempoArea = getLocalBounds();
+
 
     area.setBounds(5, 10, 100, 40);
     newArea.setBounds(1100, 10, 100, 40);
@@ -192,10 +194,11 @@ void MSComponent::resized()
     inst2SliderArea.setBounds(9, 266, (getWidth()/6) - 4, getHeight()/16);
     inst3SliderArea.setBounds(9, 356, (getWidth()/6) - 4, getHeight()/16);
 
+    tempoArea.setBounds(5,(getWidth()/1.5) - 10, 30, 30);
 
     PPButton.setBounds(area);
     area.setX(area.getX()+area.getWidth());
-    tempo.setBounds(area);
+    tempo.setBounds(tempoArea);
     keyboardComponent.setBounds(pArea);
 
     pVolumeSlider.setBounds(pSliderArea);
@@ -328,6 +331,92 @@ void MSComponent::PPButtonOnClick()
         keyboardState.allNotesOff(0);
     }
 
+}
+//================================================================
+void MSComponent::vNoteOnClick()
+{
+    int i;
+    int j;
+    for(i=0;i<50;i++)
+    {
+        for(j=0;j<25;j++)
+        {
+            notes[focusBoard][j][i].setVisible(false);
+        }
+    }
+    focusBoard = 0;
+    for(i=0;i<50;i++)
+    {
+        for(j=0;j<25;j++)
+        {
+            notes[focusBoard][j][i].setVisible(true);
+        }
+    }
+    
+}
+//================================================================
+void MSComponent::i1NoteOnClick()
+{
+    int i;
+    int j;
+    for(i=0;i<50;i++)
+    {
+        for(j=0;j<25;j++)
+        {
+            notes[focusBoard][j][i].setVisible(false);
+        }
+    }
+    focusBoard = inst1Focus;
+    for(i=0;i<50;i++)
+    {
+        for(j=0;j<25;j++)
+        {
+            notes[focusBoard][j][i].setVisible(true);
+        }
+    }
+    
+}
+//================================================================
+void MSComponent::i2NoteOnClick()
+{
+    int i;
+    int j;
+    for(i=0;i<50;i++)
+    {
+        for(j=0;j<25;j++)
+        {
+            notes[focusBoard][j][i].setVisible(false);
+        }
+    }
+    focusBoard = inst2Focus;
+    for(i=0;i<50;i++)
+    {
+        for(j=0;j<25;j++)
+        {
+            notes[focusBoard][j][i].setVisible(true);
+        }
+    }
+}
+//================================================================
+void MSComponent::i3NoteOnClick()
+{
+    int i;
+    int j;
+    for(i=0;i<50;i++)
+    {
+        for(j=0;j<25;j++)
+        {
+            notes[focusBoard][j][i].setVisible(false);
+        }
+    }
+    focusBoard = inst3Focus;
+    for(i=0;i<50;i++)
+    {
+        for(j=0;j<25;j++)
+        {
+            notes[focusBoard][j][i].setVisible(true);
+        }
+    }
 }
 //================================================================
 void MSComponent::insMenuChanged()

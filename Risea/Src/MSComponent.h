@@ -46,6 +46,10 @@ private:
     void setMidiInput(int index);
     //Play/Pause button Lambda function
     void PPButtonOnClick();
+    void vNoteOnClick();
+    void i1NoteOnClick();
+    void i2NoteOnClick();
+    void i3NoteOnClick();
 
     SynthAudioSource audioSource;
     juce::MidiKeyboardState keyboardState;
