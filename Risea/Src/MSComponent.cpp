@@ -61,7 +61,9 @@ MSComponent::MSComponent() : PPButton("Play/Pause"), audioSource(keyboardState),
     setAudioChannels(0,2);
     setSize (600, 400);
     startTimer(400);
+    DBG("Load");
     audioSource.loadFile();
+    DBG("Loaded");
 //==============================================================================
     addAndMakeVisible(pVolumeSlider);
     pVolumeSlider.setRange(0, 100);
