@@ -26,6 +26,9 @@ public:
 private:
     juce::TextButton PPButton;
     void PPButtonOnClick(); //for the Play/Pause button Lambda function
+
+    juce::TextButton PauseButton;
+    void PauseButtonOnClick();
     
     juce::TextEditor textEditor;
     void EnterText();

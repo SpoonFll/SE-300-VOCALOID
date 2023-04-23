@@ -1,10 +1,11 @@
 #include "TTSComponent.h"
 
 // Buttons etc go here
-TTSComponent::TTSComponent() : PPButton("Play/Pause"), audioSource(keyboardState), keyboardComponent(keyboardState,juce::MidiKeyboardComponent::horizontalKeyboard) 
+TTSComponent::TTSComponent() : PPButton("Play"), PauseButton("Pause"), audioSource(keyboardState), keyboardComponent(keyboardState,juce::MidiKeyboardComponent::horizontalKeyboard) 
 {
     //keyboardState.noteOn(1,1,15);
     addAndMakeVisible(&PPButton);
+    addAndMakeVisible(&PauseButton);
     addAndMakeVisible(voiceMenu);
     EnterText();
 
@@ -20,6 +21,9 @@ TTSComponent::TTSComponent() : PPButton("Play/Pause"), audioSource(keyboardState
     PPButton.onClick =[this]{
         PPButtonOnClick();
     };
+    PauseButton.onClick =[this]{
+        PauseButtonOnClick();
+    };
     /*setMidiInput(0);
     addAndMakeVisible(keyboardComponent);
     setAudioChannels(0,2);
@@ -29,6 +33,11 @@ TTSComponent::TTSComponent() : PPButton("Play/Pause"), audioSource(keyboardState
 }
 //==============================================================================
 void TTSComponent::PPButtonOnClick()
+{
+    
+}
+//==============================================================================
+void TTSComponent::PauseButtonOnClick()
 {
     
 }
@@ -66,12 +75,15 @@ void TTSComponent::resized()
     auto area = getLocalBounds();
     auto newArea = getLocalBounds();
     auto newArea2 = getLocalBounds();
+    auto pauseArea = getLocalBounds();
 
     area.setBounds(10, 10, 100, 40);
     //itty bitty tiny pp button
+    pauseArea.setBounds(120, 10, 100, 40);
     newArea.setBounds(490, 10, 100, 40);
     //this will be continued when buttons and other items are implemented
     PPButton.setBounds(area);
+    PauseButton.setBounds(pauseArea);
     voiceMenu.setBounds(newArea);
 
     textEditor.setBounds(newArea2.reduced(20, 60));
