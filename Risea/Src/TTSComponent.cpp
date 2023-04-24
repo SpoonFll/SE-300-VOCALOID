@@ -21,9 +21,11 @@ TTSComponent::TTSComponent() : PPButton("Play"), PauseButton("Pause"), audioSour
     PPButton.onClick =[this]{
         PPButtonOnClick();
     };
+    PPButton.setColour (juce::TextButton::buttonColourId, juce::Colours::green);
     PauseButton.onClick =[this]{
         PauseButtonOnClick();
     };
+    PauseButton.setColour (juce::TextButton::buttonColourId, juce::Colours::red);
     /*setMidiInput(0);
     addAndMakeVisible(keyboardComponent);
     setAudioChannels(0,2);
