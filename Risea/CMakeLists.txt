@@ -44,7 +44,7 @@ juce_add_gui_app(GuiAppExample
     # ICON_SMALL ...
     # DOCUMENT_EXTENSIONS ...           # Specify file extensions that should be associated with this app
     # COMPANY_NAME ...                  # Specify the name of the app's author
-    PRODUCT_NAME "Gui App Example")     # The name of the final executable, which can differ from the target name
+    PRODUCT_NAME "Risea")     # The name of the final executable, which can differ from the target name
 
 # `juce_generate_juce_header` will create a JuceHeader.h for a given target, which will be generated
 # into your build tree. This should be included with `#include <JuceHeader.h>`. The include path for
@@ -61,9 +61,19 @@ juce_add_gui_app(GuiAppExample
 
 target_sources(GuiAppExample
     PRIVATE
-        Main.cpp
-        MainComponent.cpp
-        MainComponent.h)
+        Src/Main.cpp
+        Src/MainComponent.cpp
+        Src/MainComponent.h
+        Src/HELPComponent.cpp
+        Src/HELPComponent.h
+        Src/MSComponent.h
+        Src/MSComponent.cpp
+        Src/TTSComponent.h
+        Src/TTSComponent.cpp
+        Src/Synthesizer.h
+        Src/WavPlayer.h
+        )
+
 
 # `target_compile_definitions` adds some preprocessor definitions to our target. In a Projucer
 # project, these might be passed in the 'Preprocessor Definitions' field. JUCE modules also make use
@@ -99,6 +109,12 @@ target_link_libraries(GuiAppExample
     PRIVATE
         # GuiAppData            # If we'd created a binary data target, we'd link to it here
         juce::juce_gui_extra
+        juce::juce_audio_formats
+        juce::juce_audio_basics
+        juce::juce_audio_devices
+        juce::juce_audio_processors
+        juce::juce_audio_utils
+        juce::juce_core
     PUBLIC
         juce::juce_recommended_config_flags
         juce::juce_recommended_lto_flags
